@@ -27,17 +27,21 @@ namespace Q_Learning
             Console.WriteLine("End demo");
             Console.ReadLine();
         }
-        static void Print(double[][] Q) {
+        static void Print(double[][] Q)
+        {
             int ns = Q.Length;
             Console.WriteLine("[0] [1] . . [11]");
-            for (int i = 0; i < ns; ++i) {
-                for (int j = 0; j < ns; ++j) {
+            for (int i = 0; i < ns; ++i)
+            {
+                for (int j = 0; j < ns; ++j)
+                {
                     Console.Write(Q[i][j].ToString("F2") + " ");
                 }
                 Console.WriteLine();
             }
         }
-        static int[][] CreateMaze(int ns) {
+        static int[][] CreateMaze(int ns)
+        {
             int[][] FT = new int[ns][];
             for (int i = 0; i < ns; ++i) FT[i] = new int[ns];
             FT[0][1] = FT[0][4] = FT[1][0] = FT[1][5] = FT[2][3] = 1;
@@ -48,7 +52,8 @@ namespace Q_Learning
             FT[11][11] = 1;  // Goal
             return FT;
         }
-        static double[][] CreateReward(int ns) {
+        static double[][] CreateReward(int ns)
+        {
             double[][] R = new double[ns][];
             for (int i = 0; i < ns; ++i) R[i] = new double[ns];
             R[0][1] = R[0][4] = R[1][0] = R[1][5] = R[2][3] = -0.1;
@@ -59,19 +64,22 @@ namespace Q_Learning
             R[7][11] = 10.0;  // Goal
             return R;
         }
-        static double[][] CreateQuality(int ns) {
+        static double[][] CreateQuality(int ns)
+        {
             double[][] Q = new double[ns][];
             for (int i = 0; i < ns; ++i)
                 Q[i] = new double[ns];
             return Q;
         }
-        static List<int> GetPossNextStates(int s, int[][] FT) {
+        static List<int> GetPossNextStates(int s, int[][] FT)
+        {
             List<int> result = new List<int>();
             for (int j = 0; j < FT.Length; ++j)
                 if (FT[s][j] == 1) result.Add(j);
             return result;
         }
-        static int GetRandNextState(int s, int[][] FT) {
+        static int GetRandNextState(int s, int[][] FT)
+        {
             List<int> possNextStates = GetPossNextStates(s, FT);
             int ct = possNextStates.Count;
             int idx = rnd.Next(0, ct);
@@ -80,19 +88,22 @@ namespace Q_Learning
         static void Train(int[][] FT, double[][] R, double[][] Q,
             int goal, double gamma, double lrnRate, int maxEpochs)
         {
-            for (int epoch = 0; epoch < maxEpochs; ++epoch) {
+            for (int epoch = 0; epoch < maxEpochs; ++epoch)
+            {
                 int currState = rnd.Next(0, R.Length);
-                
-                while (true) {
+
+                while (true)
+                {
                     int nextState = GetRandNextState(currState, FT);
                     List<int> possNextNextStates = GetPossNextStates(nextState, FT);
                     double maxQ = double.MinValue;
-                    for (int j = 0; j < possNextNextStates.Count; ++j) {
+                    for (int j = 0; j < possNextNextStates.Count; ++j)
+                    {
                         int nns = possNextNextStates[j];  // short alias
                         double q = Q[nextState][nns];
                         if (q > maxQ) maxQ = q;
                     }
-                    
+
                     Q[currState][nextState] =
                         ((1 - lrnRate) * Q[currState][nextState]) +
                         (lrnRate * (R[currState][nextState] + (gamma * maxQ)));
@@ -101,21 +112,26 @@ namespace Q_Learning
                 }
             }
         }
-        static void Walk(int start, int goal, double[][] Q) {
-            int curr = start;  int next;
+        static void Walk(int start, int goal, double[][] Q)
+        {
+            int curr = start; int next;
             Console.Write(curr + "->");
-            while (curr != goal) {
+            while (curr != goal)
+            {
                 next = ArgMax(Q[curr]);
                 Console.Write(next + "->");
                 curr = next;
             }
             Console.WriteLine("done");
         }
-        static int ArgMax(double[] vector) {
-            double maxVal = vector[0];  int idx = 0;
-            for (int i = 0; i < vector.Length; ++i) {
-                if (vector[i] > maxVal) {
-                    maxVal = vector[i];  idx = i;
+        static int ArgMax(double[] vector)
+        {
+            double maxVal = vector[0]; int idx = 0;
+            for (int i = 0; i < vector.Length; ++i)
+            {
+                if (vector[i] > maxVal)
+                {
+                    maxVal = vector[i]; idx = i;
                 }
             }
             return idx;
