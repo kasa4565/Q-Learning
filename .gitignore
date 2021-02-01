@@ -7,3 +7,5 @@ riderModule.iml
 /.idea/.idea.Q-Learning/.idea/encodings.xml
 /.idea/.idea.Q-Learning/.idea/indexLayout.xml
 /.idea/.idea.Q-Learning/.idea/vcs.xml
+.vscode/launch.json
+.vscode/tasks.json
