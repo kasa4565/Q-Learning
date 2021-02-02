@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Q-Learning", "Q-Learning\Q-Learning.csproj", "{4BCAABAA-36CE-4DD9-B52F-101AD37EBBCC}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Q-Learning", "Q-Learning\Q-Learning.csproj", "{4BCAABAA-36CE-4DD9-B52F-101AD37EBBCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeWpfApp", "MazeWpfApp\MazeWpfApp.csproj", "{14A7EA2E-4C4B-45CB-B693-DFB5CC6CC900}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{4BCAABAA-36CE-4DD9-B52F-101AD37EBBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BCAABAA-36CE-4DD9-B52F-101AD37EBBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BCAABAA-36CE-4DD9-B52F-101AD37EBBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A7EA2E-4C4B-45CB-B693-DFB5CC6CC900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A7EA2E-4C4B-45CB-B693-DFB5CC6CC900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A7EA2E-4C4B-45CB-B693-DFB5CC6CC900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A7EA2E-4C4B-45CB-B693-DFB5CC6CC900}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A562F725-EEEC-4478-B1ED-7EB225C2F91D}
 	EndGlobalSection
 EndGlobal

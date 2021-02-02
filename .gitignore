@@ -9,3 +9,4 @@ riderModule.iml
 /.idea/.idea.Q-Learning/.idea/vcs.xml
 .vscode/launch.json
 .vscode/tasks.json
+/.vs
