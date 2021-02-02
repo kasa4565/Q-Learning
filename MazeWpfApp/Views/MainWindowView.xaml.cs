@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MazeWpfApp
+namespace MazeWpfApp.Views
 {
     /// <summary>
-    /// Interaction logic for GameBoard.xaml
+    /// Interaction logic for MainWindowView.xaml
     /// </summary>
-    public partial class GameBoard : Window
+    public partial class MainWindowView : Window
     {
-        public GameBoard()
+        public MainWindowView()
         {
             InitializeComponent();
         }
