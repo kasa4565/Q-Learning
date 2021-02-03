@@ -28,7 +28,7 @@ namespace MazeWpfApp.ViewModels
 
             settings.QuantityOfColumns = 4;
             settings.QuantityOfRows = 3;
-            settings.SizeOfCell = 40;
+            settings.SizeOfCell = 50;
             settings.XPos = Width/2;
             settings.YPos = Height/2;
 

@@ -54,8 +54,8 @@ namespace MazeWpfApp.ViewModels
             line.X2 = x2;
             line.Y2 = y2;
 
-            line.Stroke = Brushes.Black;
-            line.StrokeThickness = 4;
+            line.Stroke = Brushes.Gray;
+            line.StrokeThickness = 0.5;
 
             return line;
         }
