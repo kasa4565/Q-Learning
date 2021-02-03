@@ -26,6 +26,9 @@ namespace MazeWpfApp.ViewModels
         public double Width { get; set; }
         public UIElement Content { get; set; }
 
+        public double StartXPos => _Settings.XPos - Width / 2;
+        public double StartYPos => _Settings.YPos - Height / 2;
+
         private UIElement GetMazeVisualization()
         {
             var maze = new Grid();
@@ -40,14 +43,26 @@ namespace MazeWpfApp.ViewModels
         {
             var borderWalls = new Grid();
 
-            var startXPos = _Settings.XPos - Width / 2;
-            var startYPos = _Settings.YPos - Height / 2;
-            var endXPos = startXPos + _Settings.SizeOfCell - 1;
-            var endYPos = startYPos;
-
-            var wall = new WallView(startXPos, startYPos, endXPos, endYPos);
+            //top border
+            var wall = new WallView(StartXPos, StartYPos, StartXPos + Width - 1, StartYPos);
 
             borderWalls.Children.Add(wall);
+
+            //bot border
+            wall = new WallView(StartXPos, StartYPos + Height - 1, StartXPos + Width - 1, StartYPos + Height - 1);
+
+            borderWalls.Children.Add(wall);
+
+            //left border
+            wall = new WallView(StartXPos, StartYPos, StartXPos, StartYPos + Height - 1);
+
+            borderWalls.Children.Add(wall);
+
+            //right border
+            wall = new WallView(StartXPos + Width - 1, StartYPos, StartXPos + Width - 1, StartYPos + Height - 1);
+
+            borderWalls.Children.Add(wall);
+
 
             return borderWalls;
         }
@@ -68,10 +83,8 @@ namespace MazeWpfApp.ViewModels
         private IEnumerable<CellView> GetCellsList()
         {
             var cells = new List<CellView>();
-            var startXPos = _Settings.XPos - Width/2;
-            var startYPos = _Settings.YPos - Height/2;
-            var currentX = startXPos;
-            var currentY = startYPos;
+            var currentX = StartXPos;
+            var currentY = StartYPos;
 
             for(int rowNumber = 1; rowNumber <= _Settings.QuantityOfRows; rowNumber++)
             {
@@ -83,7 +96,7 @@ namespace MazeWpfApp.ViewModels
                 }
 
                 currentY += _Settings.SizeOfCell;
-                currentX = startXPos;
+                currentX = StartXPos;
             }
 
             return cells;
