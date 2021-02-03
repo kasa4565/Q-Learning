@@ -21,10 +21,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class GameBoardView : UserControl
     {
-        public GameBoardView()
+        public GameBoardView(double width, double height)
         {
             InitializeComponent();
-            DataContext = new GameBoardViewModel();
+            DataContext = new GameBoardViewModel(width, height);
         }
     }
 }

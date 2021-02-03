@@ -18,16 +18,16 @@ namespace MazeWpfApp.ViewModels
             Content = CreateCell(topLeftX, topLeftY);
         }
 
-        public int Height { get; set; }
-        public int Width { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
         public Grid Content { get; set; }
         
         private Grid CreateCell(double topLeftX, double topLeftY)
         {
             var grid = new Grid();
 
-            int shiftBeyondCornersInX = Width - 1;
-            int shiftBeyondCornersInY = Height - 1;
+            var shiftBeyondCornersInX = Width - 1;
+            var shiftBeyondCornersInY = Height - 1;
 
             Line topLine = GetLine(topLeftX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY);
             grid.Children.Add(topLine);

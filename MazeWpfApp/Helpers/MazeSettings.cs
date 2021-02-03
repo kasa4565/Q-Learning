@@ -8,8 +8,8 @@ namespace MazeWpfApp.Helpers
 {
     public class MazeSettings
     {
-        public int StartXPos { get; set; }
-        public int StartYPos { get; set; }
+        public double XPos { get; set; }
+        public double YPos { get; set; }
         public int QuantityOfColumns { get; set; }
         public int QuantityOfRows { get; set; }
         public int SizeOfCell { get; set; }

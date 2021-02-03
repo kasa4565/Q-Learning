@@ -22,8 +22,8 @@ namespace MazeWpfApp.ViewModels
             Content = GetMazeVisualization();
         }
 
-        public int Height { get; set; }
-        public int Width { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
         public UIElement Content { get; set; }
 
         private UIElement GetMazeVisualization()
@@ -47,8 +47,10 @@ namespace MazeWpfApp.ViewModels
         private IEnumerable<CellView> GetCellsList()
         {
             var cells = new List<CellView>();
-            int currentX = _Settings.StartXPos;
-            int currentY = _Settings.StartYPos;
+            var startXPos = _Settings.XPos - Width/2;
+            var startYPos = _Settings.YPos - Height/2;
+            var currentX = startXPos;
+            var currentY = startYPos;
 
             for(int rowNumber = 1; rowNumber <= _Settings.QuantityOfRows; rowNumber++)
             {
@@ -60,7 +62,7 @@ namespace MazeWpfApp.ViewModels
                 }
 
                 currentY += _Settings.SizeOfCell;
-                currentX = _Settings.StartXPos;
+                currentX = startXPos;
             }
 
             return cells;

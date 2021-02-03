@@ -4,5 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Maze Game" Height="450" Width="800"
+        MaxHeight="{Binding Height}"
+        MaxWidth="{Binding Width}"
+        MinHeight="{Binding Height}"
+        MinWidth="{Binding Width}"
+        Title="{Binding Title}"
         Content="{Binding View}"/>

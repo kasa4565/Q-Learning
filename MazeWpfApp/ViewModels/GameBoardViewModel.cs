@@ -11,15 +11,15 @@ namespace MazeWpfApp.ViewModels
 {
     public class GameBoardViewModel
     {
-        public GameBoardViewModel()
+        public GameBoardViewModel(double width, double height)
         {
-            Height = 450;
-            Width = 800;
+            Height = height;
+            Width = width;
             Content = new MazeView(GetMazeSettings());
         }
 
-        public int Height { get; set; }
-        public int Width { get; set; }
+        public double Height { get; set; }
+        public double Width { get; set; }
         public UIElement Content { get; set; }
 
         private MazeSettings GetMazeSettings()
@@ -29,8 +29,8 @@ namespace MazeWpfApp.ViewModels
             settings.QuantityOfColumns = 4;
             settings.QuantityOfRows = 3;
             settings.SizeOfCell = 40;
-            settings.StartXPos = 10;
-            settings.StartYPos = 10;
+            settings.XPos = Width/2;
+            settings.YPos = Height/2;
 
             return settings;
         }
