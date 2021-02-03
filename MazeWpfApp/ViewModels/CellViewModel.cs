@@ -11,31 +11,34 @@ namespace MazeWpfApp.ViewModels
 {
     public class CellViewModel
     {
-        public CellViewModel()
+        public CellViewModel(double topLeftX, double topLeftY)
         {
             Height = 40;
             Width = 40;
-            Content = CreateCell();
+            Content = CreateCell(topLeftX, topLeftY);
         }
 
         public int Height { get; set; }
         public int Width { get; set; }
         public Grid Content { get; set; }
         
-        private Grid CreateCell()
+        private Grid CreateCell(double topLeftX, double topLeftY)
         {
             var grid = new Grid();
 
-            Line topLine = GetLine(1, 1, 40, 1);
+            int shiftBeyondCornersInX = Width - 1;
+            int shiftBeyondCornersInY = Height - 1;
+
+            Line topLine = GetLine(topLeftX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY);
             grid.Children.Add(topLine);
 
-            Line botLine = GetLine(1, 40, 40, 40);
+            Line botLine = GetLine(topLeftX, topLeftY + shiftBeyondCornersInY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
             grid.Children.Add(botLine);
 
-            Line leftLine = GetLine(1, 1, 1, 40);
+            Line leftLine = GetLine(topLeftX, topLeftY, topLeftX, topLeftY + shiftBeyondCornersInY);
             grid.Children.Add(leftLine);
 
-            Line rightLine = GetLine(40, 1, 40, 40);
+            Line rightLine = GetLine(topLeftX + shiftBeyondCornersInX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
             grid.Children.Add(rightLine);
 
             return grid;
