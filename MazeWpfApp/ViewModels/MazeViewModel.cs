@@ -1,4 +1,5 @@
-﻿using MazeWpfApp.Views;
+﻿using MazeWpfApp.Helpers;
+using MazeWpfApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,13 @@ namespace MazeWpfApp.ViewModels
 {
     public class MazeViewModel
     {
-        public MazeViewModel()
+        private readonly MazeSettings _Settings;
+
+        public MazeViewModel(MazeSettings settings)
         {
-            Height = 120;
-            Width = 160;
+            _Settings = settings;
+            Height = _Settings.QuantityOfRows * _Settings.SizeOfCell;
+            Width = _Settings.QuantityOfColumns * _Settings.SizeOfCell;
             Content = GetMazeVisualization();
         }
 
@@ -24,13 +28,13 @@ namespace MazeWpfApp.ViewModels
 
         private UIElement GetMazeVisualization()
         {
-            return GetLattice(200,180);
+            return GetLattice();
         }
 
-        private Grid GetLattice(int startX, int startY)
+        private Grid GetLattice()
         {
             var lattice = new Grid();
-            var cells = GetCellsList(4,3, startX, startY);
+            var cells = GetCellsList();
 
             foreach(var cell in cells)
             {
@@ -40,23 +44,23 @@ namespace MazeWpfApp.ViewModels
             return lattice;
         }
 
-        private IEnumerable<CellView> GetCellsList(int quantityOfColumns, int quantityOfRows, int startX, int startY)
+        private IEnumerable<CellView> GetCellsList()
         {
             var cells = new List<CellView>();
-            int currentX = startX;
-            int currentY = startY;
+            int currentX = _Settings.StartXPos;
+            int currentY = _Settings.StartYPos;
 
-            for(int rowNumber = 1; rowNumber <= quantityOfRows; rowNumber++)
+            for(int rowNumber = 1; rowNumber <= _Settings.QuantityOfRows; rowNumber++)
             {
-                for(int columnNumber = 1; columnNumber <= quantityOfColumns; columnNumber++)
+                for(int columnNumber = 1; columnNumber <= _Settings.QuantityOfColumns; columnNumber++)
                 {
-                    var cell = new CellView(currentX, currentY);
+                    var cell = new CellView(currentX, currentY, _Settings.SizeOfCell);
                     cells.Add(cell);
-                    currentX += 40;
+                    currentX += _Settings.SizeOfCell;
                 }
 
-                currentY += 40;
-                currentX = startX;
+                currentY += _Settings.SizeOfCell;
+                currentX = _Settings.StartXPos;
             }
 
             return cells;
