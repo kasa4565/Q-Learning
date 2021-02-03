@@ -19,6 +19,9 @@
     <Compile Update="Views\MazeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WallView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\CellView.xaml">
@@ -31,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MazeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\WallView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

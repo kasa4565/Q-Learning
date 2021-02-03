@@ -28,7 +28,28 @@ namespace MazeWpfApp.ViewModels
 
         private UIElement GetMazeVisualization()
         {
-            return GetLattice();
+            var maze = new Grid();
+
+            maze.Children.Add(GetLattice());
+            maze.Children.Add(GetBorderWalls());
+
+            return maze;
+        }
+
+        private Grid GetBorderWalls()
+        {
+            var borderWalls = new Grid();
+
+            var startXPos = _Settings.XPos - Width / 2;
+            var startYPos = _Settings.YPos - Height / 2;
+            var endXPos = startXPos + _Settings.SizeOfCell - 1;
+            var endYPos = startYPos;
+
+            var wall = new WallView(startXPos, startYPos, endXPos, endYPos);
+
+            borderWalls.Children.Add(wall);
+
+            return borderWalls;
         }
 
         private Grid GetLattice()
