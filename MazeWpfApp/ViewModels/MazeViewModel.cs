@@ -24,13 +24,13 @@ namespace MazeWpfApp.ViewModels
 
         private UIElement GetMazeVisualization()
         {
-            return GetLattice();
+            return GetLattice(200,180);
         }
 
-        private Grid GetLattice()
+        private Grid GetLattice(int startX, int startY)
         {
             var lattice = new Grid();
-            var cells = GetCellsList(4,3);
+            var cells = GetCellsList(4,3, startX, startY);
 
             foreach(var cell in cells)
             {
@@ -40,11 +40,9 @@ namespace MazeWpfApp.ViewModels
             return lattice;
         }
 
-        private IEnumerable<CellView> GetCellsList(int quantityOfColumns, int quantityOfRows)
+        private IEnumerable<CellView> GetCellsList(int quantityOfColumns, int quantityOfRows, int startX, int startY)
         {
             var cells = new List<CellView>();
-            int startX = 1;
-            int startY = 1;
             int currentX = startX;
             int currentY = startY;
 
