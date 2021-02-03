@@ -5,20 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MazeWpfApp.ViewModels
 {
-    public class GameBoardViewModel
+    public class MazeViewModel
     {
-        public GameBoardViewModel()
+        public MazeViewModel()
         {
-            Height = 450;
-            Width = 800;
-            Content = new MazeView();
+            Height = 120;
+            Width = 160;
+            Content = GetMazeVisualization();
         }
 
         public int Height { get; set; }
         public int Width { get; set; }
         public UIElement Content { get; set; }
+
+        private UIElement GetMazeVisualization()
+        {
+            return new CellView();
+        }
     }
 }

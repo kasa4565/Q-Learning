@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace MazeWpfApp.Views
 {
     /// <summary>
-    /// Interaction logic for GameBoardView.xaml
+    /// Interaction logic for CellView.xaml
     /// </summary>
-    public partial class GameBoardView : UserControl
+    public partial class CellView : UserControl
     {
-        public GameBoardView()
+        public CellView()
         {
             InitializeComponent();
-            DataContext = new GameBoardViewModel();
+            DataContext = new CellViewModel();
         }
     }
 }
