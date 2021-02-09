@@ -13,14 +13,11 @@ namespace MazeWpfApp.ViewModels
 {
     public class CellViewModel
     {
-        private readonly MazeSettings _Settings;
-
-        public CellViewModel(int id, double topLeftX, double topLeftY, int size, MazeSettings settings)
+        public CellViewModel(int id, double topLeftX, double topLeftY, int size)
         {
             Id = id;
             Height = size;
             Width = size;
-            _Settings = settings;
             Content = CreateCell(topLeftX, topLeftY);
         }
 
@@ -58,12 +55,15 @@ namespace MazeWpfApp.ViewModels
         {
             Canvas canvas = new Canvas();
             canvas.Background = Brushes.Red;
-            canvas.Margin = new Thickness(topLeftX, topLeftY, _Settings.WindowWidth - bottomRightX, _Settings.WindowHeight - bottomRightY);
+            canvas.Margin = new Thickness(topLeftX, topLeftY, 0, 0);
             canvas.Visibility = Visibility.Visible;
             canvas.MaxHeight = Height;
             canvas.MinHeight = Height;
             canvas.MaxWidth = Width;
             canvas.MinWidth = Width;
+            canvas.HorizontalAlignment = HorizontalAlignment.Left;
+            canvas.VerticalAlignment = VerticalAlignment.Top;
+
 
             return canvas;
         }

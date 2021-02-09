@@ -104,7 +104,7 @@ namespace MazeWpfApp.ViewModels
             {
                 for(int columnNumber = 1; columnNumber <= _Settings.QuantityOfColumns; columnNumber++)
                 {
-                    var cell = new CellView(cellId, currentX, currentY, _Settings.SizeOfCell, _Settings);
+                    var cell = new CellView(cellId, currentX, currentY, _Settings.SizeOfCell);
                     cells.Add(cell);
                     cellId++;
                     currentX += _Settings.SizeOfCell;
