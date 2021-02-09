@@ -1,4 +1,5 @@
 ﻿using MazeWpfApp.Helpers;
+using MazeWpfApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,14 @@ namespace MazeWpfApp.ViewModels
 {
     public class CellViewModel
     {
+        private readonly SquareColorView _SquareColorView;
+
         public CellViewModel(int id, double topLeftX, double topLeftY, int size)
         {
             Id = id;
             Height = size;
             Width = size;
+            _SquareColorView = new SquareColorView(topLeftX, topLeftY, Height, Width);
             Content = CreateCell(topLeftX, topLeftY);
         }
 
@@ -25,6 +29,17 @@ namespace MazeWpfApp.ViewModels
         public double Height { get; set; }
         public double Width { get; set; }
         public Grid Content { get; set; }
+        public ESquareState State
+        {
+            get
+            {
+                return _SquareColorView.ViewModel.State;
+            }
+            set
+            {
+                _SquareColorView.ViewModel.State = value;
+            }
+        }
         
         private Grid CreateCell(double topLeftX, double topLeftY)
         {
@@ -45,29 +60,9 @@ namespace MazeWpfApp.ViewModels
             Line rightLine = GetLine(topLeftX + shiftBeyondCornersInX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
             grid.Children.Add(rightLine);
 
-            UIElement backgroundRectangle = GetBackgroundRectangle(topLeftX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
-            grid.Children.Add(backgroundRectangle);
+            grid.Children.Add(_SquareColorView);
 
             return grid;
-        }
-
-        private UIElement GetBackgroundRectangle(double topLeftX, double topLeftY, double bottomRightX, double bottomRightY)
-        {
-            double canvasPadding = 5;
-
-            Canvas canvas = new Canvas();
-            canvas.Background = Brushes.LightGreen;
-            canvas.Margin = new Thickness(topLeftX + canvasPadding, topLeftY + canvasPadding, 0, 0);
-            canvas.Visibility = Visibility.Visible;
-            canvas.MaxHeight = Height - (canvasPadding * 2);
-            canvas.MinHeight = Height - (canvasPadding * 2);
-            canvas.MaxWidth = Width - (canvasPadding * 2);
-            canvas.MinWidth = Width - (canvasPadding * 2);
-            canvas.HorizontalAlignment = HorizontalAlignment.Left;
-            canvas.VerticalAlignment = VerticalAlignment.Top;
-
-
-            return canvas;
         }
 
         private static Line GetLine(double x1, double y1, double x2, double y2)

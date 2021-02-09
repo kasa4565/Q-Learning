@@ -15,12 +15,14 @@ namespace MazeWpfApp.ViewModels
     {
         private readonly MazeSettings _Settings;
         private readonly MazeConstructor _Constructor;
+        private readonly IEnumerable<CellView> _CellsList;
 
         public MazeViewModel(MazeSettings settings)
         {
             _Settings = settings;
             _Constructor = new MazeConstructor(MazeExamples.Example_1(), settings);
-            
+            _CellsList = GetCellsList();
+
             Content = GetMazeVisualization();
         }
 
@@ -32,7 +34,7 @@ namespace MazeWpfApp.ViewModels
         {
             var maze = new Grid();
 
-            maze.Children.Add(GetLattice());
+            maze.Children.Add(GetLatticeGrid(_CellsList));
             maze.Children.Add(GetBorderWalls());
             maze.Children.Add(GetMazeWalls());
 
@@ -80,13 +82,21 @@ namespace MazeWpfApp.ViewModels
             return borderWalls;
         }
 
-        private Grid GetLattice()
+        private Grid GetLatticeGrid(IEnumerable<CellView> cells)
         {
             var lattice = new Grid();
-            var cells = GetCellsList();
 
             foreach(var cell in cells)
             {
+                if(cell.ViewModel.Id == _Settings.StartSquareIndex)
+                {
+                    cell.ViewModel.State = ESquareState.IsStart;
+                }
+                else if(cell.ViewModel.Id == _Settings.MetaSquareIndex)
+                {
+                    cell.ViewModel.State = ESquareState.IsMeta;
+                }
+
                 lattice.Children.Add(cell);
             }
 

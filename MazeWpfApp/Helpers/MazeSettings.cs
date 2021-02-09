@@ -19,5 +19,7 @@ namespace MazeWpfApp.Helpers
         public double StartYPos => YPos - MazeHeight / 2;
         public double WindowWidth { get; set; }
         public double WindowHeight { get; set; }
+        public int StartSquareIndex { get; set; }
+        public int MetaSquareIndex { get; set; }
     }
 }

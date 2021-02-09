@@ -19,6 +19,9 @@
     <Compile Update="Views\MazeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SquareColorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\WallView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MazeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SquareColorView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\WallView.xaml">

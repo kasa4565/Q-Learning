@@ -1,5 +1,4 @@
-﻿using MazeWpfApp.Helpers;
-using MazeWpfApp.ViewModels;
+﻿using MazeWpfApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +17,17 @@ using System.Windows.Shapes;
 namespace MazeWpfApp.Views
 {
     /// <summary>
-    /// Interaction logic for CellView.xaml
+    /// Interaction logic for SquareColorView.xaml
     /// </summary>
-    public partial class CellView : UserControl
+    public partial class SquareColorView : UserControl
     {
-        public CellView(int id, double topLeftX, double topLeftY, int sizeOfCell)
+        public SquareColorView(double topLeftX, double topLeftY, double height, double width)
         {
             InitializeComponent();
-            ViewModel = new CellViewModel(id, topLeftX, topLeftY, sizeOfCell);
+            ViewModel = new SquareColorViewModel(topLeftX, topLeftY, height, width);
             DataContext = ViewModel;
         }
 
-        public CellViewModel ViewModel { get; set; }
+        public SquareColorViewModel ViewModel { get; set; }
     }
 }

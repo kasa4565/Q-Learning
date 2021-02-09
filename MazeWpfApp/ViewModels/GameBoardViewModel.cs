@@ -33,6 +33,8 @@ namespace MazeWpfApp.ViewModels
             settings.YPos = Height/2;
             settings.WindowHeight = Height;
             settings.WindowWidth = Width;
+            settings.StartSquareIndex = 8;
+            settings.MetaSquareIndex = 11;
 
             return settings;
         }
