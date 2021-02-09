@@ -13,5 +13,9 @@ namespace MazeWpfApp.Helpers
         public int QuantityOfColumns { get; set; }
         public int QuantityOfRows { get; set; }
         public int SizeOfCell { get; set; }
+        public double Width => QuantityOfColumns * SizeOfCell;
+        public double Height => QuantityOfRows * SizeOfCell;
+        public double StartXPos => XPos - Width / 2;
+        public double StartYPos => YPos - Height / 2;
     }
 }

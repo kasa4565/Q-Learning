@@ -1,5 +1,6 @@
 ﻿using MazeWpfApp.Helpers;
 using MazeWpfApp.Views;
+using Q_Learning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,19 @@ namespace MazeWpfApp.ViewModels
     public class MazeViewModel
     {
         private readonly MazeSettings _Settings;
+        private readonly MazeConstructor _Constructor;
 
         public MazeViewModel(MazeSettings settings)
         {
             _Settings = settings;
-            Height = _Settings.QuantityOfRows * _Settings.SizeOfCell;
-            Width = _Settings.QuantityOfColumns * _Settings.SizeOfCell;
+            _Constructor = new MazeConstructor(MazeExamples.Example_1(), settings);
+            
             Content = GetMazeVisualization();
         }
 
-        public double Height { get; set; }
-        public double Width { get; set; }
         public UIElement Content { get; set; }
 
-        public double StartXPos => _Settings.XPos - Width / 2;
-        public double StartYPos => _Settings.YPos - Height / 2;
+        
 
         private UIElement GetMazeVisualization()
         {
@@ -35,8 +34,22 @@ namespace MazeWpfApp.ViewModels
 
             maze.Children.Add(GetLattice());
             maze.Children.Add(GetBorderWalls());
+            maze.Children.Add(GetMazeWalls());
 
             return maze;
+        }
+
+        private Grid GetMazeWalls()
+        {
+            var walls = new Grid();
+            var wallsList = _Constructor.GetMazeWallsViews();
+
+            foreach(var wall in wallsList)
+            {
+                walls.Children.Add(wall);
+            }
+
+            return walls;
         }
 
         private Grid GetBorderWalls()
@@ -44,22 +57,22 @@ namespace MazeWpfApp.ViewModels
             var borderWalls = new Grid();
 
             //top border
-            var wall = new WallView(StartXPos, StartYPos, StartXPos + Width - 1, StartYPos);
+            var wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos);
 
             borderWalls.Children.Add(wall);
 
             //bot border
-            wall = new WallView(StartXPos, StartYPos + Height - 1, StartXPos + Width - 1, StartYPos + Height - 1);
+            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos + _Settings.Height - 1, _Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos + _Settings.Height - 1);
 
             borderWalls.Children.Add(wall);
 
             //left border
-            wall = new WallView(StartXPos, StartYPos, StartXPos, StartYPos + Height - 1);
+            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos, _Settings.StartYPos + _Settings.Height - 1);
 
             borderWalls.Children.Add(wall);
 
             //right border
-            wall = new WallView(StartXPos + Width - 1, StartYPos, StartXPos + Width - 1, StartYPos + Height - 1);
+            wall = new WallView(_Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos, _Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos + _Settings.Height - 1);
 
             borderWalls.Children.Add(wall);
 
@@ -83,20 +96,22 @@ namespace MazeWpfApp.ViewModels
         private IEnumerable<CellView> GetCellsList()
         {
             var cells = new List<CellView>();
-            var currentX = StartXPos;
-            var currentY = StartYPos;
+            var currentX = _Settings.StartXPos;
+            var currentY = _Settings.StartYPos;
+            int cellId = 0;
 
             for(int rowNumber = 1; rowNumber <= _Settings.QuantityOfRows; rowNumber++)
             {
                 for(int columnNumber = 1; columnNumber <= _Settings.QuantityOfColumns; columnNumber++)
                 {
-                    var cell = new CellView(currentX, currentY, _Settings.SizeOfCell);
+                    var cell = new CellView(cellId, currentX, currentY, _Settings.SizeOfCell);
                     cells.Add(cell);
+                    cellId++;
                     currentX += _Settings.SizeOfCell;
                 }
 
                 currentY += _Settings.SizeOfCell;
-                currentX = StartXPos;
+                currentX = _Settings.StartXPos;
             }
 
             return cells;

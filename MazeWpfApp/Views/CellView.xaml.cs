@@ -21,10 +21,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class CellView : UserControl
     {
-        public CellView(double topLeftX, double topLeftY, int sizeOfCell)
+        public CellView(int id, double topLeftX, double topLeftY, int sizeOfCell)
         {
             InitializeComponent();
-            DataContext = new CellViewModel(topLeftX, topLeftY, sizeOfCell);
+            DataContext = new CellViewModel(id, topLeftX, topLeftY, sizeOfCell);
         }
     }
 }

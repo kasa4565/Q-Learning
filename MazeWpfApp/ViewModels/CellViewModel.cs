@@ -11,13 +11,15 @@ namespace MazeWpfApp.ViewModels
 {
     public class CellViewModel
     {
-        public CellViewModel(double topLeftX, double topLeftY, int size)
+        public CellViewModel(int id, double topLeftX, double topLeftY, int size)
         {
+            Id = id;
             Height = size;
             Width = size;
             Content = CreateCell(topLeftX, topLeftY);
         }
 
+        public int Id { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
         public Grid Content { get; set; }
