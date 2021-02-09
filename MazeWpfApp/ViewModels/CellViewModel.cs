@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MazeWpfApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -11,11 +13,14 @@ namespace MazeWpfApp.ViewModels
 {
     public class CellViewModel
     {
-        public CellViewModel(int id, double topLeftX, double topLeftY, int size)
+        private readonly MazeSettings _Settings;
+
+        public CellViewModel(int id, double topLeftX, double topLeftY, int size, MazeSettings settings)
         {
             Id = id;
             Height = size;
             Width = size;
+            _Settings = settings;
             Content = CreateCell(topLeftX, topLeftY);
         }
 
@@ -43,7 +48,24 @@ namespace MazeWpfApp.ViewModels
             Line rightLine = GetLine(topLeftX + shiftBeyondCornersInX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
             grid.Children.Add(rightLine);
 
+            UIElement backgroundRectangle = GetBackgroundRectangle(topLeftX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
+            grid.Children.Add(backgroundRectangle);
+
             return grid;
+        }
+
+        private UIElement GetBackgroundRectangle(double topLeftX, double topLeftY, double bottomRightX, double bottomRightY)
+        {
+            Canvas canvas = new Canvas();
+            canvas.Background = Brushes.Red;
+            canvas.Margin = new Thickness(topLeftX, topLeftY, _Settings.WindowWidth - bottomRightX, _Settings.WindowHeight - bottomRightY);
+            canvas.Visibility = Visibility.Visible;
+            canvas.MaxHeight = Height;
+            canvas.MinHeight = Height;
+            canvas.MaxWidth = Width;
+            canvas.MinWidth = Width;
+
+            return canvas;
         }
 
         private static Line GetLine(double x1, double y1, double x2, double y2)

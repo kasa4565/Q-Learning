@@ -57,22 +57,22 @@ namespace MazeWpfApp.ViewModels
             var borderWalls = new Grid();
 
             //top border
-            var wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos);
+            var wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos);
 
             borderWalls.Children.Add(wall);
 
             //bot border
-            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos + _Settings.Height - 1, _Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos + _Settings.Height - 1);
+            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1);
 
             borderWalls.Children.Add(wall);
 
             //left border
-            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos, _Settings.StartYPos + _Settings.Height - 1);
+            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1);
 
             borderWalls.Children.Add(wall);
 
             //right border
-            wall = new WallView(_Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos, _Settings.StartXPos + _Settings.Width - 1, _Settings.StartYPos + _Settings.Height - 1);
+            wall = new WallView(_Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1);
 
             borderWalls.Children.Add(wall);
 
@@ -104,7 +104,7 @@ namespace MazeWpfApp.ViewModels
             {
                 for(int columnNumber = 1; columnNumber <= _Settings.QuantityOfColumns; columnNumber++)
                 {
-                    var cell = new CellView(cellId, currentX, currentY, _Settings.SizeOfCell);
+                    var cell = new CellView(cellId, currentX, currentY, _Settings.SizeOfCell, _Settings);
                     cells.Add(cell);
                     cellId++;
                     currentX += _Settings.SizeOfCell;

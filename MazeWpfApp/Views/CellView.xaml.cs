@@ -1,4 +1,5 @@
-﻿using MazeWpfApp.ViewModels;
+﻿using MazeWpfApp.Helpers;
+using MazeWpfApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class CellView : UserControl
     {
-        public CellView(int id, double topLeftX, double topLeftY, int sizeOfCell)
+        public CellView(int id, double topLeftX, double topLeftY, int sizeOfCell, MazeSettings settings)
         {
             InitializeComponent();
-            DataContext = new CellViewModel(id, topLeftX, topLeftY, sizeOfCell);
+            DataContext = new CellViewModel(id, topLeftX, topLeftY, sizeOfCell, settings);
         }
     }
 }

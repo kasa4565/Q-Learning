@@ -31,6 +31,8 @@ namespace MazeWpfApp.ViewModels
             settings.SizeOfCell = 50;
             settings.XPos = Width/2;
             settings.YPos = Height/2;
+            settings.WindowHeight = Height;
+            settings.WindowWidth = Width;
 
             return settings;
         }
