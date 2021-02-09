@@ -3,9 +3,24 @@ using System.Collections.Generic;
 
 namespace Q_Learning
 {
-    class Program
+    public class Program
     {
         static Random rnd = new Random(1);
+
+        public static IEnumerable<int> GetMoves()
+        {
+            int ns = 12;
+            int[][] FT = CreateMaze(ns);
+            double[][] R = CreateReward(ns);
+            double[][] Q = CreateQuality(ns);
+            int goal = 11;
+            double gamma = 0.5;
+            double learnRate = 0.5;
+            int maxEpochs = 1000;
+            Train(FT, R, Q, goal, gamma, learnRate, maxEpochs);
+            return GetWalkMoves(8, 11, Q);
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Begin Q-learning maze demo");
@@ -23,10 +38,11 @@ namespace Q_Learning
             Console.WriteLine("Done. Q matrix: ");
             Print(Q);
             Console.WriteLine("Using Q to walk from cell 8 to 11");
-            Walk(8, 11, Q);
+            PrintWalk(8, 11, Q);
             Console.WriteLine("End demo");
             Console.ReadLine();
         }
+
         static void Print(double[][] Q)
         {
             int ns = Q.Length;
@@ -40,6 +56,7 @@ namespace Q_Learning
                 Console.WriteLine();
             }
         }
+
         static int[][] CreateMaze(int ns)
         {
             int[][] FT = new int[ns][];
@@ -52,6 +69,7 @@ namespace Q_Learning
             FT[11][11] = 1;  // Goal
             return FT;
         }
+
         static double[][] CreateReward(int ns)
         {
             double[][] R = new double[ns][];
@@ -64,6 +82,7 @@ namespace Q_Learning
             R[7][11] = 10.0;  // Goal
             return R;
         }
+
         static double[][] CreateQuality(int ns)
         {
             double[][] Q = new double[ns][];
@@ -71,6 +90,7 @@ namespace Q_Learning
                 Q[i] = new double[ns];
             return Q;
         }
+
         static List<int> GetPossNextStates(int s, int[][] FT)
         {
             List<int> result = new List<int>();
@@ -78,6 +98,7 @@ namespace Q_Learning
                 if (FT[s][j] == 1) result.Add(j);
             return result;
         }
+
         static int GetRandNextState(int s, int[][] FT)
         {
             List<int> possNextStates = GetPossNextStates(s, FT);
@@ -85,6 +106,7 @@ namespace Q_Learning
             int idx = rnd.Next(0, ct);
             return possNextStates[idx];
         }
+
         static void Train(int[][] FT, double[][] R, double[][] Q,
             int goal, double gamma, double lrnRate, int maxEpochs)
         {
@@ -112,7 +134,25 @@ namespace Q_Learning
                 }
             }
         }
-        static void Walk(int start, int goal, double[][] Q)
+
+        static IEnumerable<int> GetWalkMoves(int start, int goal, double[][] Q)
+        {
+            List<int> moves = new List<int>();
+
+            int curr = start; int next;
+            moves.Add(curr);
+
+            while (curr != goal)
+            {
+                next = ArgMax(Q[curr]);
+                moves.Add(next);
+                curr = next;
+            }
+
+            return moves;
+        }
+
+        static void PrintWalk(int start, int goal, double[][] Q)
         {
             int curr = start; int next;
             Console.Write(curr + "->");
@@ -124,6 +164,7 @@ namespace Q_Learning
             }
             Console.WriteLine("done");
         }
+
         static int ArgMax(double[] vector)
         {
             double maxVal = vector[0]; int idx = 0;

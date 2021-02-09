@@ -24,11 +24,11 @@ namespace MazeWpfApp.ViewModels
             _CellsList = GetCellsList();
 
             Content = GetMazeVisualization();
+
+            VisualizeWalk();
         }
 
         public UIElement Content { get; set; }
-
-        
 
         private UIElement GetMazeVisualization()
         {
@@ -39,6 +39,20 @@ namespace MazeWpfApp.ViewModels
             maze.Children.Add(GetMazeWalls());
 
             return maze;
+        }
+
+        private void VisualizeWalk()
+        {
+            var moves = Program.GetMoves();
+            moves = moves.Skip(1);
+            moves = moves.Take(moves.Count() - 1);
+
+            
+            foreach(var move in moves)
+            {
+                //System.Threading.Thread.Sleep(200);
+                _CellsList.Where(cell => cell.ViewModel.Id == move).First().ViewModel.State = ESquareState.Crossed;
+            }
         }
 
         private Grid GetMazeWalls()
