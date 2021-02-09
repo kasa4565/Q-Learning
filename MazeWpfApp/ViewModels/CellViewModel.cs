@@ -53,14 +53,16 @@ namespace MazeWpfApp.ViewModels
 
         private UIElement GetBackgroundRectangle(double topLeftX, double topLeftY, double bottomRightX, double bottomRightY)
         {
+            double canvasPadding = 5;
+
             Canvas canvas = new Canvas();
-            canvas.Background = Brushes.Red;
-            canvas.Margin = new Thickness(topLeftX, topLeftY, 0, 0);
+            canvas.Background = Brushes.LightGreen;
+            canvas.Margin = new Thickness(topLeftX + canvasPadding, topLeftY + canvasPadding, 0, 0);
             canvas.Visibility = Visibility.Visible;
-            canvas.MaxHeight = Height;
-            canvas.MinHeight = Height;
-            canvas.MaxWidth = Width;
-            canvas.MinWidth = Width;
+            canvas.MaxHeight = Height - (canvasPadding * 2);
+            canvas.MinHeight = Height - (canvasPadding * 2);
+            canvas.MaxWidth = Width - (canvasPadding * 2);
+            canvas.MinWidth = Width - (canvasPadding * 2);
             canvas.HorizontalAlignment = HorizontalAlignment.Left;
             canvas.VerticalAlignment = VerticalAlignment.Top;
 
