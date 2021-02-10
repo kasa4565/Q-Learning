@@ -24,8 +24,6 @@ namespace MazeWpfApp.ViewModels
             _CellsList = GetCellsList();
 
             Content = GetMazeVisualization();
-
-            VisualizeWalk();
         }
 
         public UIElement Content { get; set; }
@@ -41,7 +39,7 @@ namespace MazeWpfApp.ViewModels
             return maze;
         }
 
-        private void VisualizeWalk()
+        public void VisualizeWalk()
         {
             var moves = Program.GetMoves();
             moves = moves.Skip(1);
@@ -50,7 +48,7 @@ namespace MazeWpfApp.ViewModels
             
             foreach(var move in moves)
             {
-                //System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(500);
                 _CellsList.Where(cell => cell.ViewModel.Id == move).First().ViewModel.State = ESquareState.Crossed;
             }
         }

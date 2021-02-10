@@ -25,7 +25,10 @@ namespace MazeWpfApp.Views
         public MazeView(MazeSettings settings)
         {
             InitializeComponent();
-            DataContext = new MazeViewModel(settings);
+            ViewModel = new MazeViewModel(settings);
+            DataContext = ViewModel; 
         }
+
+        public MazeViewModel ViewModel { get; private set; }
     }
 }

@@ -6,21 +6,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MazeWpfApp.ViewModels
 {
     public class GameBoardViewModel
     {
+        private readonly MazeView _MazeView;
+
         public GameBoardViewModel(double width, double height)
         {
             Height = height;
             Width = width;
-            Content = new MazeView(GetMazeSettings());
+            _MazeView = new MazeView(GetMazeSettings());
+            Content = GetContent();
         }
 
         public double Height { get; set; }
         public double Width { get; set; }
         public UIElement Content { get; set; }
+
+        private Grid GetContent()
+        {
+            var grid = new Grid();
+
+            grid.Children.Add(_MazeView);
+            grid.Children.Add(GetButton());
+
+            return grid;
+        }
+
+        private Button GetButton()
+        {
+            var button = new Button();
+
+            button.Content = "START";
+            button.MaxHeight = 50;
+            button.MinHeight = 50;
+            button.MaxWidth = 150;
+            button.MinWidth = 150;
+            button.Margin = new Thickness((Width/2) - 75, 40, 0, 0);
+            button.HorizontalAlignment = HorizontalAlignment.Left;
+            button.VerticalAlignment = VerticalAlignment.Top;
+            button.Click += StartButtonClicked;
+
+            return button;
+        }
+
+        private void StartButtonClicked(object sender, RoutedEventArgs e)
+        {
+            _MazeView.ViewModel.VisualizeWalk();
+        }
 
         private MazeSettings GetMazeSettings()
         {
