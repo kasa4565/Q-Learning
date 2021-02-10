@@ -21,10 +21,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class MenuView : UserControl
     {
-        public MenuView(double viewWidth)
+        public MenuView(double width, double height)
         {
             InitializeComponent();
-            DataContext = new MenuViewModel(viewWidth);
+            DataContext = new MenuViewModel(width, height);
         }
     }
 }

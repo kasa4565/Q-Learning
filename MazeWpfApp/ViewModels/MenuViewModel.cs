@@ -5,24 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using MazeWpfApp.Views;
 
 namespace MazeWpfApp.ViewModels
 {
     public class MenuViewModel
     {
-        public MenuViewModel(double viewWidth)
+        public MenuViewModel(double width, double height)
         {
-            Content = GetButtons(viewWidth);
+            Width = width;
+            Height = height;
+            GameBoard = new GameBoardView(Width, Height);
+            Content = GetButtons();
         }
 
-        public Canvas Content { get; set; }
+        public UIElement Content { get; set; }
+        public double Width { get; private set; }
+        public double Height { get; private set; }
+        public UIElement Menu { get; set; }
+        public UIElement GameBoard { get; set; }
 
-        private Canvas GetButtons(double viewWidth)
+        private UIElement GetButtons()
         {
             var canvas = new Canvas();
             canvas.HorizontalAlignment = HorizontalAlignment.Left;
             canvas.VerticalAlignment = VerticalAlignment.Top;
-            canvas.Margin = new Thickness((viewWidth / 2) - 75, 0, 0, 0);
+            canvas.Margin = new Thickness((Width / 2) - 75, 0, 0, 0);
 
             for (int i = 1; i < 4; i++)
             {
@@ -38,12 +46,20 @@ namespace MazeWpfApp.ViewModels
                 canvas.Children.Add(button);
             }
 
-            return canvas;
+            Menu = canvas;
+
+            var grid = new Grid();
+            grid.Children.Add(canvas);
+            GameBoard.Visibility = Visibility.Collapsed;
+            grid.Children.Add(GameBoard);
+
+            return grid;
         }
 
         private void MazeButtonClicked(object sender, RoutedEventArgs e)
         {
-            
+            Menu.Visibility = Visibility.Collapsed;
+            GameBoard.Visibility = Visibility.Visible;
         }
     }
 }
