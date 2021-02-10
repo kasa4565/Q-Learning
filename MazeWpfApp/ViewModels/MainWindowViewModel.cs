@@ -15,7 +15,8 @@ namespace MazeWpfApp.ViewModels
             Height = 400;
             Width = 600;
             Title = "Maze Game";
-            View = new GameBoardView(Width, Height);
+            //View = new GameBoardView(Width, Height);
+            View = new MenuView(Width);
         }
 
         public UserControl View { get; set; }
