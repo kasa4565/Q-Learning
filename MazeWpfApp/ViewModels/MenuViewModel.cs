@@ -24,6 +24,7 @@ namespace MazeWpfApp.ViewModels
         public double Height { get; private set; }
         public UIElement Menu { get; set; }
         public UIElement GameBoard { get; set; }
+        public UIElement BackButton { get; set; }
 
         private UIElement GetButtons()
         {
@@ -52,14 +53,42 @@ namespace MazeWpfApp.ViewModels
             grid.Children.Add(canvas);
             GameBoard.Visibility = Visibility.Collapsed;
             grid.Children.Add(GameBoard);
+            var backButton = GetBackButton();
+            backButton.Visibility = Visibility.Collapsed;
+            BackButton = backButton;
+            grid.Children.Add(backButton);
 
             return grid;
+        }
+
+        private UIElement GetBackButton()
+        {
+            var button = new Button();
+            button.Content = "BACK";
+            button.MaxHeight = 50;
+            button.MinHeight = 50;
+            button.MaxWidth = 150;
+            button.MinWidth = 150;
+            button.Margin = new Thickness(10, 10, 0, 0);
+            button.HorizontalAlignment = HorizontalAlignment.Left;
+            button.VerticalAlignment = VerticalAlignment.Top;
+            button.Click += BackButtonClicked;
+
+            return button;
+        }
+
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Menu.Visibility = Visibility.Visible;
+            GameBoard.Visibility = Visibility.Collapsed;
+            BackButton.Visibility = Visibility.Collapsed;
         }
 
         private void MazeButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
             GameBoard.Visibility = Visibility.Visible;
+            BackButton.Visibility = Visibility.Visible;
         }
     }
 }
