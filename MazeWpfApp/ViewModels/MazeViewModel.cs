@@ -41,7 +41,7 @@ namespace MazeWpfApp.ViewModels
 
         public void VisualizeWalk()
         {
-            var moves = Program.GetMoves();
+            var moves = Inteligence.GetMoves();
             moves = moves.Skip(1);
             moves = moves.Take(moves.Count() - 1);
 
