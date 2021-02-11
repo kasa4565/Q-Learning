@@ -8,31 +8,25 @@ namespace Q_Learning
 {
     public class Intelligence
     {
-        static Random rnd = new Random(1);
+        private static Random _Random = new Random(1);
+        private const double _Gamma = 0.5;
+        private const double _LearnRate = 0.5;
+        private const int _MaxEpochs = 1000;
 
         public static void RunInConsole()
         {
             Console.WriteLine("Begin Q-learning maze demo");
             Console.WriteLine("Setting up maze and rewards");
-
             var maze = MazeExamples.Example_1();
-            int[][] FT = maze.Matrix;
-            double[][] R = maze.Reward;
-            double[][] Q = maze.Quality;
-            int goal = maze.Goal;
 
             Console.WriteLine("Analyzing maze using Q-learning");
-
-            double gamma = 0.5;
-            double learnRate = 0.5;
-            int maxEpochs = 1000;
-            Train(FT, R, Q, goal, gamma, learnRate, maxEpochs);
+            Train(maze.Matrix, maze.Reward, maze.Quality, maze.Goal, _Gamma, _LearnRate, _MaxEpochs);
 
             Console.WriteLine("Done. Q matrix: ");
-            Print(Q);
+            Print(maze.Quality);
 
             Console.WriteLine("Using Q to walk from cell 8 to 11");
-            PrintWalk(8, 11, Q);
+            PrintWalk(maze.Start, maze.Goal, maze.Quality);
 
             Console.WriteLine("End demo");
             Console.ReadLine();
@@ -41,17 +35,10 @@ namespace Q_Learning
         public static IEnumerable<int> GetMoves()
         {
             var maze = MazeExamples.Example_1();
-            int[][] FT = maze.Matrix;
-            double[][] R = maze.Reward;
-            double[][] Q = maze.Quality;
-            int goal = maze.Goal;
-            double gamma = 0.5;
-            double learnRate = 0.5;
-            int maxEpochs = 1000;
 
-            Train(FT, R, Q, goal, gamma, learnRate, maxEpochs);
+            Train(maze.Matrix, maze.Reward, maze.Quality, maze.Goal, _Gamma, _LearnRate, _MaxEpochs);
 
-            return GetWalkMoves(maze.Start, maze.Goal, Q);
+            return GetWalkMoves(maze.Start, maze.Goal, maze.Quality);
         }
 
         static void Print(double[][] Q)
@@ -80,7 +67,7 @@ namespace Q_Learning
         {
             List<int> possNextStates = GetPossNextStates(s, FT);
             int ct = possNextStates.Count;
-            int idx = rnd.Next(0, ct);
+            int idx = _Random.Next(0, ct);
             return possNextStates[idx];
         }
 
@@ -89,7 +76,7 @@ namespace Q_Learning
         {
             for (int epoch = 0; epoch < maxEpochs; ++epoch)
             {
-                int currState = rnd.Next(0, R.Length);
+                int currState = _Random.Next(0, R.Length);
 
                 while (true)
                 {
