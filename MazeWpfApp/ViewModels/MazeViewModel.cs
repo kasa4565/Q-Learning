@@ -20,7 +20,7 @@ namespace MazeWpfApp.ViewModels
         public MazeViewModel(MazeSettings settings)
         {
             _Settings = settings;
-            _Constructor = new MazeConstructor(MazeExamples.Example_1(), settings);
+            _Constructor = new MazeConstructor(MazeExamples.Example_1().Matrix, settings);
             _CellsList = GetCellsList();
 
             Content = GetMazeVisualization();
@@ -41,7 +41,7 @@ namespace MazeWpfApp.ViewModels
 
         public void VisualizeWalk()
         {
-            var moves = Inteligence.GetMoves();
+            var moves = Intelligence.GetMoves();
             moves = moves.Skip(1);
             moves = moves.Take(moves.Count() - 1);
 

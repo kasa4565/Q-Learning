@@ -7,7 +7,7 @@ namespace Q_Learning
     {
         static void Main(string[] args)
         {
-            Inteligence.RunInConsole();
+            Intelligence.RunInConsole();
         }
     }
         

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Q_Learning
 {
-    public class Inteligence
+    public class Intelligence
     {
         static Random rnd = new Random(1);
 
@@ -14,36 +14,44 @@ namespace Q_Learning
         {
             Console.WriteLine("Begin Q-learning maze demo");
             Console.WriteLine("Setting up maze and rewards");
-            int ns = 12;
-            int[][] FT = CreateMaze(ns);
-            double[][] R = CreateReward(ns);
-            double[][] Q = CreateQuality(ns);
+
+            var maze = MazeExamples.Example_1();
+            int[][] FT = maze.Matrix;
+            double[][] R = maze.Reward;
+            double[][] Q = maze.Quality;
+            int goal = maze.Goal;
+
             Console.WriteLine("Analyzing maze using Q-learning");
-            int goal = 11;
+
             double gamma = 0.5;
             double learnRate = 0.5;
             int maxEpochs = 1000;
             Train(FT, R, Q, goal, gamma, learnRate, maxEpochs);
+
             Console.WriteLine("Done. Q matrix: ");
             Print(Q);
+
             Console.WriteLine("Using Q to walk from cell 8 to 11");
             PrintWalk(8, 11, Q);
+
             Console.WriteLine("End demo");
             Console.ReadLine();
         }
 
         public static IEnumerable<int> GetMoves()
         {
-            int ns = 12;
-            int[][] FT = CreateMaze(ns);
-            double[][] R = CreateReward(ns);
-            double[][] Q = CreateQuality(ns);
-            int goal = 11;
+            var maze = MazeExamples.Example_1();
+            int[][] FT = maze.Matrix;
+            double[][] R = maze.Reward;
+            double[][] Q = maze.Quality;
+            int goal = maze.Goal;
             double gamma = 0.5;
             double learnRate = 0.5;
             int maxEpochs = 1000;
+
             Train(FT, R, Q, goal, gamma, learnRate, maxEpochs);
-            return GetWalkMoves(8, 11, Q);
+
+            return GetWalkMoves(maze.Start, maze.Goal, Q);
         }
 
         static void Print(double[][] Q)
@@ -58,40 +66,6 @@ namespace Q_Learning
                 }
                 Console.WriteLine();
             }
-        }
-
-        static int[][] CreateMaze(int ns)
-        {
-            int[][] FT = new int[ns][];
-            for (int i = 0; i < ns; ++i) FT[i] = new int[ns];
-            FT[0][1] = FT[0][4] = FT[1][0] = FT[1][5] = FT[2][3] = 1;
-            FT[2][6] = FT[3][2] = FT[3][7] = FT[4][0] = FT[4][8] = 1;
-            FT[5][1] = FT[5][6] = FT[5][9] = FT[6][2] = FT[6][5] = 1;
-            FT[6][7] = FT[7][3] = FT[7][6] = FT[7][11] = FT[8][4] = 1;
-            FT[8][9] = FT[9][5] = FT[9][8] = FT[9][10] = FT[10][9] = 1;
-            FT[11][11] = 1;  // Goal
-            return FT;
-        }
-
-        static double[][] CreateReward(int ns)
-        {
-            double[][] R = new double[ns][];
-            for (int i = 0; i < ns; ++i) R[i] = new double[ns];
-            R[0][1] = R[0][4] = R[1][0] = R[1][5] = R[2][3] = -0.1;
-            R[2][6] = R[3][2] = R[3][7] = R[4][0] = R[4][8] = -0.1;
-            R[5][1] = R[5][6] = R[5][9] = R[6][2] = R[6][5] = -0.1;
-            R[6][7] = R[7][3] = R[7][6] = R[7][11] = R[8][4] = -0.1;
-            R[8][9] = R[9][5] = R[9][8] = R[9][10] = R[10][9] = -0.1;
-            R[7][11] = 10.0;  // Goal
-            return R;
-        }
-
-        static double[][] CreateQuality(int ns)
-        {
-            double[][] Q = new double[ns][];
-            for (int i = 0; i < ns; ++i)
-                Q[i] = new double[ns];
-            return Q;
         }
 
         static List<int> GetPossNextStates(int s, int[][] FT)
