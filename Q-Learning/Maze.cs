@@ -8,6 +8,7 @@ namespace Q_Learning
 {
     public class Maze
     {
+        public int Id { get; set; }
         public int NumberOfSquares { get; set; }
         public int Start { get; set; }
         public int Goal { get; set; }

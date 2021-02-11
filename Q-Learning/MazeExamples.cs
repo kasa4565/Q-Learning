@@ -12,6 +12,7 @@ namespace Q_Learning
         {
             var maze = new Maze();
 
+            maze.Id = 1;
             maze.NumberOfSquares = 12;
             maze.Start = 8;
             maze.Goal = 11;
