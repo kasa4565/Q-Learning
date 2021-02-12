@@ -1,6 +1,6 @@
 ﻿using MazeWpfApp.ViewModels;
-using Q_Learning;
 using System.Windows.Controls;
+
 namespace MazeWpfApp.Views
 {
     /// <summary>
@@ -8,10 +8,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class GameBoardView : UserControl
     {
-        public GameBoardView(GameBoardViewModel gameBoardViewModel)
+        public GameBoardView(GameBoardViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = gameBoardViewModel;
+            DataContext = viewModel;
         }
     }
 }

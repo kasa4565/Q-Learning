@@ -8,13 +8,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class SquareColorView : UserControl
     {
-        public SquareColorView(double topLeftX, double topLeftY, double height, double width)
+        public SquareColorView(SquareColorViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new SquareColorViewModel(topLeftX, topLeftY, height, width);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
-
-        public SquareColorViewModel ViewModel { get; set; }
     }
 }

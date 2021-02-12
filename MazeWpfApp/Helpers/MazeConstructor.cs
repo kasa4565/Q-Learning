@@ -1,4 +1,5 @@
-﻿using MazeWpfApp.Views;
+﻿using MazeWpfApp.ViewModels;
+using MazeWpfApp.Views;
 using Q_Learning;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace MazeWpfApp.Helpers
                     if (ShouldBeWallBetween(i, j))
                     {
                         var (x1, y1, x2, y2) = GetEndpointsOfWall(i, j);
-                        var wall = new WallView(x1, y1, x2, y2);
+                        var wall = new WallView(new WallViewModel(x1, y1, x2, y2));
                         walls.Add(wall);
                     }
                 }

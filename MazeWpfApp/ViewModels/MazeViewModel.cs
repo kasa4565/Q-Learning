@@ -68,22 +68,22 @@ namespace MazeWpfApp.ViewModels
             var borderWalls = new Grid();
 
             //top border
-            var wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos);
+            var wall = new WallView(new WallViewModel(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos));
 
             borderWalls.Children.Add(wall);
 
             //bot border
-            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1);
+            wall = new WallView(new WallViewModel(_Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1));
 
             borderWalls.Children.Add(wall);
 
             //left border
-            wall = new WallView(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1);
+            wall = new WallView(new WallViewModel(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1));
 
             borderWalls.Children.Add(wall);
 
             //right border
-            wall = new WallView(_Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1);
+            wall = new WallView(new WallViewModel(_Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1));
 
             borderWalls.Children.Add(wall);
 

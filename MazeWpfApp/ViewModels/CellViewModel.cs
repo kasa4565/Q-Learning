@@ -14,14 +14,14 @@ namespace MazeWpfApp.ViewModels
 {
     public class CellViewModel
     {
-        private readonly SquareColorView _SquareColorView;
+        private readonly SquareColorViewModel _SquareColorViewModel;
 
         public CellViewModel(int id, double topLeftX, double topLeftY, int size)
         {
             Id = id;
             Height = size;
             Width = size;
-            _SquareColorView = new SquareColorView(topLeftX, topLeftY, Height, Width);
+            _SquareColorViewModel = new SquareColorViewModel(topLeftX, topLeftY, Height, Width);
             Content = CreateCell(topLeftX, topLeftY);
         }
 
@@ -33,11 +33,11 @@ namespace MazeWpfApp.ViewModels
         {
             get
             {
-                return _SquareColorView.ViewModel.State;
+                return _SquareColorViewModel.State;
             }
             set
             {
-                _SquareColorView.ViewModel.State = value;
+                _SquareColorViewModel.State = value;
             }
         }
         
@@ -60,7 +60,7 @@ namespace MazeWpfApp.ViewModels
             Line rightLine = GetLine(topLeftX + shiftBeyondCornersInX, topLeftY, topLeftX + shiftBeyondCornersInX, topLeftY + shiftBeyondCornersInY);
             grid.Children.Add(rightLine);
 
-            grid.Children.Add(_SquareColorView);
+            grid.Children.Add(new SquareColorView(_SquareColorViewModel));
 
             return grid;
         }
