@@ -1,5 +1,6 @@
 ﻿using MazeWpfApp.Helpers;
 using MazeWpfApp.Views;
+using Q_Learning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,32 @@ namespace MazeWpfApp.ViewModels
 {
     public class GameBoardViewModel
     {
-        private readonly MazeView _MazeView;
+        private MazeView _MazeView;
+        private Maze _Maze;
 
-        public GameBoardViewModel(double width, double height)
+        public GameBoardViewModel(double width, double height, Maze maze)
         {
             Height = height;
             Width = width;
-            _MazeView = new MazeView(GetMazeSettings());
-            Content = GetContent();
+            Maze = maze;
         }
 
         public double Height { get; set; }
         public double Width { get; set; }
         public UIElement Content { get; set; }
+        public Maze Maze
+        {
+            get
+            {
+                return _Maze;
+            }
+            set
+            {
+                _Maze = value;
+                _MazeView = new MazeView(GetMazeSettings());
+                Content = GetContent();
+            }
+        }
 
         private Grid GetContent()
         {
@@ -45,7 +59,7 @@ namespace MazeWpfApp.ViewModels
             button.MinHeight = 50;
             button.MaxWidth = 150;
             button.MinWidth = 150;
-            button.Margin = new Thickness((Width/2) - 75, 40, 0, 0);
+            button.Margin = new Thickness((Width / 2) - 75, 40, 0, 0);
             button.HorizontalAlignment = HorizontalAlignment.Left;
             button.VerticalAlignment = VerticalAlignment.Top;
             button.Click += StartButtonClicked;
@@ -55,7 +69,7 @@ namespace MazeWpfApp.ViewModels
 
         private void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            _MazeView.ViewModel.VisualizeWalk();
+            _MazeView.ViewModel.VisualizeWalk(Maze);
         }
 
         private MazeSettings GetMazeSettings()
@@ -65,12 +79,13 @@ namespace MazeWpfApp.ViewModels
             settings.QuantityOfColumns = 4;
             settings.QuantityOfRows = 3;
             settings.SizeOfCell = 50;
-            settings.XPos = Width/2;
-            settings.YPos = Height/2;
+            settings.XPos = Width / 2;
+            settings.YPos = Height / 2;
             settings.WindowHeight = Height;
             settings.WindowWidth = Width;
             settings.StartSquareIndex = 8;
             settings.MetaSquareIndex = 11;
+            settings.Maze = Maze;
 
             return settings;
         }

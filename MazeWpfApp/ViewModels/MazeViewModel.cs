@@ -20,7 +20,7 @@ namespace MazeWpfApp.ViewModels
         public MazeViewModel(MazeSettings settings)
         {
             _Settings = settings;
-            _Constructor = new MazeConstructor(MazeExamples.Example_1().Matrix, settings);
+            _Constructor = new MazeConstructor(settings);
             _CellsList = GetCellsList();
 
             Content = GetMazeVisualization();
@@ -39,16 +39,15 @@ namespace MazeWpfApp.ViewModels
             return maze;
         }
 
-        public void VisualizeWalk()
+        public void VisualizeWalk(Maze maze)
         {
-            var moves = Intelligence.GetMoves(MazeExamples.Example_1());
+            var moves = Intelligence.GetMoves(maze);
             moves = moves.Skip(1);
             moves = moves.Take(moves.Count() - 1);
 
             
             foreach(var move in moves)
             {
-                System.Threading.Thread.Sleep(500);
                 _CellsList.Where(cell => cell.ViewModel.Id == move).First().ViewModel.State = ESquareState.Crossed;
             }
         }

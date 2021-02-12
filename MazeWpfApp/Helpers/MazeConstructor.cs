@@ -9,12 +9,10 @@ namespace MazeWpfApp.Helpers
 {
     public class MazeConstructor
     {
-        private readonly int[][] _AllowableMoves;
         private readonly MazeSettings _Settings;
 
-        public MazeConstructor(int[][] allowableMoves, MazeSettings settings)
+        public MazeConstructor(MazeSettings settings)
         {
-            _AllowableMoves = allowableMoves;
             _Settings = settings;
         }
 
@@ -46,7 +44,7 @@ namespace MazeWpfApp.Helpers
                                       (secondSquareIndex - firstSquareIndex == 1) ||
                                       (firstSquareIndex - secondSquareIndex == _Settings.QuantityOfColumns) ||
                                       (secondSquareIndex - firstSquareIndex == _Settings.QuantityOfColumns);
-            var moveIsNotAllowed = _AllowableMoves[firstSquareIndex][secondSquareIndex] == 0;
+            var moveIsNotAllowed = _Settings.Maze.Matrix[firstSquareIndex][secondSquareIndex] == 0;
 
             return indexesAreNotTheSame && squaresAreNeighbors && moveIsNotAllowed;
         }

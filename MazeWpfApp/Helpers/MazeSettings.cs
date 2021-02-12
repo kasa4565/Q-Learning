@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Q_Learning;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +22,6 @@ namespace MazeWpfApp.Helpers
         public double WindowHeight { get; set; }
         public int StartSquareIndex { get; set; }
         public int MetaSquareIndex { get; set; }
+        public Maze Maze { get; set; }
     }
 }

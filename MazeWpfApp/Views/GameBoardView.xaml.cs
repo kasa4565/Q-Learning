@@ -1,4 +1,5 @@
 ﻿using MazeWpfApp.ViewModels;
+using Q_Learning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,13 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class GameBoardView : UserControl
     {
-        public GameBoardView(double width, double height)
+        private readonly GameBoardViewModel _ViewModel;
+
+        public GameBoardView(double width, double height, Maze maze)
         {
             InitializeComponent();
-            DataContext = new GameBoardViewModel(width, height);
+            _ViewModel = new GameBoardViewModel(width, height, maze);
+            DataContext = _ViewModel;
         }
     }
 }
