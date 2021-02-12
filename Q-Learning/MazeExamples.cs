@@ -144,8 +144,6 @@
 
         public static Maze Example_3()
         {
-            //TODO
-
             var maze = new Maze();
 
             maze.Id = 3;
