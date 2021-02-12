@@ -104,7 +104,8 @@ namespace Q_Learning
             Console.WriteLine("Setting up mazes and rewards");
 
             List<Maze> mazes = new List<Maze>();
-            mazes.Add(MazeExamples.Example_1());
+            //mazes.Add(MazeExamples.Example_1());
+            mazes.Add(MazeExamples.Example_2());
 
             foreach(var maze in mazes)
             {
@@ -125,7 +126,7 @@ namespace Q_Learning
         private static void Print(Maze maze)
         {
             int ns = maze.Quality.Length;
-            Console.WriteLine($"[0] [1] . . [{maze.NumberOfSquares}]");
+            Console.WriteLine($"[0] [1] . . [{maze.NumberOfSquares - 1}]");
             for (int i = 0; i < ns; ++i)
             {
                 for (int j = 0; j < ns; ++j)

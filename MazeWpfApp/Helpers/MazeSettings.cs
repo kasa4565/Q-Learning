@@ -9,19 +9,14 @@ namespace MazeWpfApp.Helpers
 {
     public class MazeSettings
     {
+        public Maze Maze { get; set; }
         public double XPos { get; set; }
         public double YPos { get; set; }
-        public int QuantityOfColumns { get; set; }
-        public int QuantityOfRows { get; set; }
-        public int SizeOfCell { get; set; }
-        public double MazeWidth => QuantityOfColumns * SizeOfCell;
-        public double MazeHeight => QuantityOfRows * SizeOfCell;
+        public double MazeWidth => Maze.QuantityOfColumns * Maze.SizeOfCell;
+        public double MazeHeight => Maze.QuantityOfRows * Maze.SizeOfCell;
         public double StartXPos => XPos - MazeWidth / 2;
         public double StartYPos => YPos - MazeHeight / 2;
         public double WindowWidth { get; set; }
         public double WindowHeight { get; set; }
-        public int StartSquareIndex { get; set; }
-        public int MetaSquareIndex { get; set; }
-        public Maze Maze { get; set; }
     }
 }

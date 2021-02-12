@@ -76,15 +76,10 @@ namespace MazeWpfApp.ViewModels
         {
             var settings = new MazeSettings();
 
-            settings.QuantityOfColumns = 4;
-            settings.QuantityOfRows = 3;
-            settings.SizeOfCell = 50;
             settings.XPos = Width / 2;
             settings.YPos = Height / 2;
             settings.WindowHeight = Height;
             settings.WindowWidth = Width;
-            settings.StartSquareIndex = 8;
-            settings.MetaSquareIndex = 11;
             settings.Maze = Maze;
 
             return settings;

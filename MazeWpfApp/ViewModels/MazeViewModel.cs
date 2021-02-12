@@ -99,11 +99,11 @@ namespace MazeWpfApp.ViewModels
 
             foreach(var cell in cells)
             {
-                if(cell.ViewModel.Id == _Settings.StartSquareIndex)
+                if(cell.ViewModel.Id == _Settings.Maze.Start)
                 {
                     cell.ViewModel.State = ESquareState.IsStart;
                 }
-                else if(cell.ViewModel.Id == _Settings.MetaSquareIndex)
+                else if(cell.ViewModel.Id == _Settings.Maze.Goal)
                 {
                     cell.ViewModel.State = ESquareState.IsMeta;
                 }
@@ -121,17 +121,17 @@ namespace MazeWpfApp.ViewModels
             var currentY = _Settings.StartYPos;
             int cellId = 0;
 
-            for(int rowNumber = 1; rowNumber <= _Settings.QuantityOfRows; rowNumber++)
+            for(int rowNumber = 1; rowNumber <= _Settings.Maze.QuantityOfRows; rowNumber++)
             {
-                for(int columnNumber = 1; columnNumber <= _Settings.QuantityOfColumns; columnNumber++)
+                for(int columnNumber = 1; columnNumber <= _Settings.Maze.QuantityOfColumns; columnNumber++)
                 {
-                    var cell = new CellView(cellId, currentX, currentY, _Settings.SizeOfCell);
+                    var cell = new CellView(cellId, currentX, currentY, _Settings.Maze.SizeOfCell);
                     cells.Add(cell);
                     cellId++;
-                    currentX += _Settings.SizeOfCell;
+                    currentX += _Settings.Maze.SizeOfCell;
                 }
 
-                currentY += _Settings.SizeOfCell;
+                currentY += _Settings.Maze.SizeOfCell;
                 currentX = _Settings.StartXPos;
             }
 
