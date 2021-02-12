@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Q_Learning
 {
+    /// <summary>
+    /// Most important class. There is Q-Learning which learns to solve the maze.
+    /// </summary>
     public class Intelligence
     {
         private const double _Gamma = 0.5;
@@ -18,12 +21,20 @@ namespace Q_Learning
             _Random = new Random(1);
         }
 
+        /// <summary>
+        /// Train and get list of moves to do.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<int> GetMoves()
         {
             Train();
             return GetWalkMoves();
         }
 
+        /// <summary>
+        /// Go through maze matrix looking for the best way to get the goal.
+        /// Establishing the quality of each move thanks to reward matrix.
+        /// </summary>
         private void Train()
         {
             for (int epoch = 0; epoch < _MaxEpochs; ++epoch)
@@ -52,6 +63,10 @@ namespace Q_Learning
             }
         }
 
+        /// <summary>
+        /// Get list of moves. Established by height of each move quality.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<int> GetWalkMoves()
         {
             List<int> moves = new List<int>();

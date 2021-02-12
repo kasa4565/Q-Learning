@@ -1,5 +1,8 @@
 ﻿namespace Q_Learning
 {
+    /// <summary>
+    /// Samples of mazes.
+    /// </summary>
     public static class MazeExamples
     {
         public static Maze Example_1()

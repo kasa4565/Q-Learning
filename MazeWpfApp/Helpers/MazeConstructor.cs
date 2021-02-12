@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace MazeWpfApp.Helpers
 {
+    /// <summary>
+    /// Generic constructor for maze walls.
+    /// </summary>
     public class MazeConstructor
     {
         private readonly MazeSettings _Settings;

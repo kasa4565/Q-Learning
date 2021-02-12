@@ -5,6 +5,10 @@ namespace Q_Learning
 {
     public class Program
     {
+        /// <summary>
+        /// Start the program.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.WriteLine("Begin Q-learning maze demo");
