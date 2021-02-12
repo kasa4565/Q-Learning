@@ -7,7 +7,7 @@
             var maze = new Maze();
 
             maze.Id = 1;
-            maze.NumberOfSquares = 12;
+            maze.QuantityOfSquares = 12;
             maze.Start = 8;
             maze.Goal = 11;
             maze.QuantityOfColumns = 4;
@@ -15,12 +15,12 @@
             maze.SizeOfCell = 50;
             maze.Matrix = CreateMatrix();
             maze.Reward = CreateReward();
-            maze.Quality = CreateQuality(maze.NumberOfSquares);
+            maze.Quality = CreateQuality(maze.QuantityOfSquares);
 
             int[][] CreateMatrix()
             {
-                int[][] FT = new int[maze.NumberOfSquares][];
-                for (int i = 0; i < maze.NumberOfSquares; ++i) FT[i] = new int[maze.NumberOfSquares];
+                int[][] FT = new int[maze.QuantityOfSquares][];
+                for (int i = 0; i < maze.QuantityOfSquares; ++i) FT[i] = new int[maze.QuantityOfSquares];
                 FT[0][1] = FT[0][4] = FT[1][0] = FT[1][5] = FT[2][3] = 1;
                 FT[2][6] = FT[3][2] = FT[3][7] = FT[4][0] = FT[4][8] = 1;
                 FT[5][1] = FT[5][6] = FT[5][9] = FT[6][2] = FT[6][5] = 1;
@@ -32,8 +32,8 @@
 
             double[][] CreateReward()
             {
-                double[][] R = new double[maze.NumberOfSquares][];
-                for (int i = 0; i < maze.NumberOfSquares; ++i) R[i] = new double[maze.NumberOfSquares];
+                double[][] R = new double[maze.QuantityOfSquares][];
+                for (int i = 0; i < maze.QuantityOfSquares; ++i) R[i] = new double[maze.QuantityOfSquares];
                 R[0][1] = R[0][4] = R[1][0] = R[1][5] = R[2][3] = -0.1;
                 R[2][6] = R[3][2] = R[3][7] = R[4][0] = R[4][8] = -0.1;
                 R[5][1] = R[5][6] = R[5][9] = R[6][2] = R[6][5] = -0.1;
@@ -51,7 +51,7 @@
             var maze = new Maze();
 
             maze.Id = 2;
-            maze.NumberOfSquares = 60;
+            maze.QuantityOfSquares = 60;
             maze.Start = 0;
             maze.Goal = 9;
             maze.QuantityOfColumns = 10;
@@ -59,12 +59,12 @@
             maze.SizeOfCell = 40;
             maze.Matrix = CreateMatrix();
             maze.Reward = CreateReward();
-            maze.Quality = CreateQuality(maze.NumberOfSquares);
+            maze.Quality = CreateQuality(maze.QuantityOfSquares);
 
             int[][] CreateMatrix()
             {
-                int[][] FT = new int[maze.NumberOfSquares][];
-                for (int i = 0; i < maze.NumberOfSquares; ++i) FT[i] = new int[maze.NumberOfSquares];
+                int[][] FT = new int[maze.QuantityOfSquares][];
+                for (int i = 0; i < maze.QuantityOfSquares; ++i) FT[i] = new int[maze.QuantityOfSquares];
                 FT[0][1] = FT[1][0] = FT[1][2] = FT[2][1] = FT[2][12] = FT[3][4] = 1;
                 FT[3][13] = FT[4][3] = FT[4][5] = FT[5][4] = FT[5][6] = 1;
                 FT[6][5] = FT[6][7] = FT[7][6] = FT[8][18] = FT[10][20] = 1;
@@ -95,8 +95,8 @@
 
             double[][] CreateReward()
             {
-                double[][] R = new double[maze.NumberOfSquares][];
-                for (int i = 0; i < maze.NumberOfSquares; ++i) R[i] = new double[maze.NumberOfSquares];
+                double[][] R = new double[maze.QuantityOfSquares][];
+                for (int i = 0; i < maze.QuantityOfSquares; ++i) R[i] = new double[maze.QuantityOfSquares];
                 R[0][1] = R[1][2] = R[2][1] = R[2][12] = R[3][4] = -0.01;
                 R[3][13] = R[4][3] = R[4][5] = R[5][4] = R[5][6] = -0.01;
                 R[6][5] = R[6][7] = R[7][6] = R[8][18] = R[10][20] = -0.01;
@@ -135,17 +135,17 @@
             var maze = new Maze();
 
             maze.Id = 1;
-            maze.NumberOfSquares = 12;
+            maze.QuantityOfSquares = 12;
             maze.Start = 8;
             maze.Goal = 11;
             maze.Matrix = CreateMatrix();
             maze.Reward = CreateReward();
-            maze.Quality = CreateQuality(maze.NumberOfSquares);
+            maze.Quality = CreateQuality(maze.QuantityOfSquares);
 
             int[][] CreateMatrix()
             {
-                int[][] FT = new int[maze.NumberOfSquares][];
-                for (int i = 0; i < maze.NumberOfSquares; ++i) FT[i] = new int[maze.NumberOfSquares];
+                int[][] FT = new int[maze.QuantityOfSquares][];
+                for (int i = 0; i < maze.QuantityOfSquares; ++i) FT[i] = new int[maze.QuantityOfSquares];
                 FT[0][1] = FT[0][4] = FT[1][0] = FT[1][5] = FT[2][3] = 1;
                 FT[2][6] = FT[3][2] = FT[3][7] = FT[4][0] = FT[4][8] = 1;
                 FT[5][1] = FT[5][6] = FT[5][9] = FT[6][2] = FT[6][5] = 1;
@@ -157,8 +157,8 @@
 
             double[][] CreateReward()
             {
-                double[][] R = new double[maze.NumberOfSquares][];
-                for (int i = 0; i < maze.NumberOfSquares; ++i) R[i] = new double[maze.NumberOfSquares];
+                double[][] R = new double[maze.QuantityOfSquares][];
+                for (int i = 0; i < maze.QuantityOfSquares; ++i) R[i] = new double[maze.QuantityOfSquares];
                 R[0][1] = R[0][4] = R[1][0] = R[1][5] = R[2][3] = -0.1;
                 R[2][6] = R[3][2] = R[3][7] = R[4][0] = R[4][8] = -0.1;
                 R[5][1] = R[5][6] = R[5][9] = R[6][2] = R[6][5] = -0.1;

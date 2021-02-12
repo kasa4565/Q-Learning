@@ -3,7 +3,7 @@
     public class Maze
     {
         public int Id { get; set; }
-        public int NumberOfSquares { get; set; }
+        public int QuantityOfSquares { get; set; }
         public int QuantityOfColumns { get; set; }
         public int QuantityOfRows { get; set; }
         public int SizeOfCell { get; set; }

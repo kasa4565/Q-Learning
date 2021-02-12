@@ -128,7 +128,7 @@ namespace Q_Learning
         private void Print(Maze maze)
         {
             int ns = maze.Quality.Length;
-            Console.WriteLine($"[0] [1] . . [{maze.NumberOfSquares - 1}]");
+            Console.WriteLine($"[0] [1] . . [{maze.QuantityOfSquares - 1}]");
 
             for (int i = 0; i < ns; ++i)
             {

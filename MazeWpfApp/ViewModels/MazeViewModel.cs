@@ -106,7 +106,7 @@ namespace MazeWpfApp.ViewModels
                 }
                 else if(cell.ViewModel.Id == _Settings.Maze.Goal)
                 {
-                    cell.ViewModel.State = ESquareState.IsMeta;
+                    cell.ViewModel.State = ESquareState.IsGoal;
                 }
 
                 lattice.Children.Add(cell);

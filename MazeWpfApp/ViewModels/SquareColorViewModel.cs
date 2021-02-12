@@ -66,7 +66,7 @@ namespace MazeWpfApp.ViewModels
         {
             { ESquareState.Empty, Brushes.Transparent },
             { ESquareState.Crossed, Brushes.LightGreen },
-            { ESquareState.IsMeta, Brushes.Red },
+            { ESquareState.IsGoal, Brushes.Red },
             { ESquareState.IsStart, Brushes.Green }
         };
 

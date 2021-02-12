@@ -1,34 +1,33 @@
 ﻿using MazeWpfApp.Views;
+using Q_Learning;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MazeWpfApp.Helpers
 {
     public class MazeConstructor
     {
         private readonly MazeSettings _Settings;
+        private readonly Maze _Maze;
 
         public MazeConstructor(MazeSettings settings)
         {
             _Settings = settings;
+            _Maze = _Settings.Maze;
         }
 
         public IEnumerable<WallView> GetMazeWallsViews()
         {
             var walls = new List<WallView>();
-            int countOfSquares = _Settings.Maze.QuantityOfColumns * _Settings.Maze.QuantityOfRows;
 
-            for (int i = 0; i < countOfSquares; i++)
+            for (int i = 0; i < _Maze.QuantityOfSquares; i++)
             {
-                for(int j = 0; j < countOfSquares; j++)
+                for(int j = 0; j < _Maze.QuantityOfSquares; j++)
                 {
                     if (ShouldBeWallBetween(i, j))
                     {
-                        var endpoints = GetEndpointsOfWall(i, j);
-                        var wall = new WallView(endpoints.x1, endpoints.y1, endpoints.x2, endpoints.y2);
+                        var (x1, y1, x2, y2) = GetEndpointsOfWall(i, j);
+                        var wall = new WallView(x1, y1, x2, y2);
                         walls.Add(wall);
                     }
                 }
@@ -42,9 +41,9 @@ namespace MazeWpfApp.Helpers
             var indexesAreNotTheSame = firstSquareIndex != secondSquareIndex;
             var squaresAreNeighbors = (firstSquareIndex - secondSquareIndex == 1) ||
                                       (secondSquareIndex - firstSquareIndex == 1) ||
-                                      (firstSquareIndex - secondSquareIndex == _Settings.Maze.QuantityOfColumns) ||
-                                      (secondSquareIndex - firstSquareIndex == _Settings.Maze.QuantityOfColumns);
-            var moveIsNotAllowed = _Settings.Maze.Matrix[firstSquareIndex][secondSquareIndex] == 0;
+                                      (firstSquareIndex - secondSquareIndex == _Maze.QuantityOfColumns) ||
+                                      (secondSquareIndex - firstSquareIndex == _Maze.QuantityOfColumns);
+            var moveIsNotAllowed = _Maze.Matrix[firstSquareIndex][secondSquareIndex] == 0;
 
             return indexesAreNotTheSame && squaresAreNeighbors && moveIsNotAllowed;
         }
@@ -55,21 +54,21 @@ namespace MazeWpfApp.Helpers
             double x1 = -1, y1 = -1, x2 = -1, y2 = -1;
 
             //top wall of first square
-            if(firstSquareId == (secondSquareId + _Settings.Maze.QuantityOfColumns))
+            if(firstSquareId == (secondSquareId + _Maze.QuantityOfColumns))
             {
                 x1 = firstSquareTopLeftCornerPosition.x;
                 y1 = firstSquareTopLeftCornerPosition.y;
-                x2 = firstSquareTopLeftCornerPosition.x + _Settings.Maze.SizeOfCell;
+                x2 = firstSquareTopLeftCornerPosition.x + _Maze.SizeOfCell;
                 y2 = firstSquareTopLeftCornerPosition.y;
             }
 
             //bottom wall of first square
-            if(firstSquareId == (secondSquareId - _Settings.Maze.QuantityOfColumns))
+            if(firstSquareId == (secondSquareId - _Maze.QuantityOfColumns))
             {
                 x1 = firstSquareTopLeftCornerPosition.x;
-                y1 = firstSquareTopLeftCornerPosition.y + _Settings.Maze.SizeOfCell;
-                x2 = firstSquareTopLeftCornerPosition.x + _Settings.Maze.SizeOfCell;
-                y2 = firstSquareTopLeftCornerPosition.y + _Settings.Maze.SizeOfCell;
+                y1 = firstSquareTopLeftCornerPosition.y + _Maze.SizeOfCell;
+                x2 = firstSquareTopLeftCornerPosition.x + _Maze.SizeOfCell;
+                y2 = firstSquareTopLeftCornerPosition.y + _Maze.SizeOfCell;
             }
 
             //left wall of first square
@@ -78,16 +77,16 @@ namespace MazeWpfApp.Helpers
                 x1 = firstSquareTopLeftCornerPosition.x;
                 y1 = firstSquareTopLeftCornerPosition.y;
                 x2 = firstSquareTopLeftCornerPosition.x;
-                y2 = firstSquareTopLeftCornerPosition.y + _Settings.Maze.SizeOfCell;
+                y2 = firstSquareTopLeftCornerPosition.y + _Maze.SizeOfCell;
             }
 
             //right wall of first square
             if(firstSquareId == (secondSquareId - 1))
             {
-                x1 = firstSquareTopLeftCornerPosition.x + _Settings.Maze.SizeOfCell;
+                x1 = firstSquareTopLeftCornerPosition.x + _Maze.SizeOfCell;
                 y1 = firstSquareTopLeftCornerPosition.y;
-                x2 = firstSquareTopLeftCornerPosition.x + _Settings.Maze.SizeOfCell;
-                y2 = firstSquareTopLeftCornerPosition.y + _Settings.Maze.SizeOfCell;
+                x2 = firstSquareTopLeftCornerPosition.x + _Maze.SizeOfCell;
+                y2 = firstSquareTopLeftCornerPosition.y + _Maze.SizeOfCell;
             }
 
             return (x1, y1, x2, y2);
@@ -97,14 +96,14 @@ namespace MazeWpfApp.Helpers
         {
             var matrix = GetLatticeMatrix();
 
-            for (int row = 0; row < _Settings.Maze.QuantityOfRows; row++)
+            for (int row = 0; row < _Maze.QuantityOfRows; row++)
             {
-                for (int column = 0; column < _Settings.Maze.QuantityOfColumns; column++)
+                for (int column = 0; column < _Maze.QuantityOfColumns; column++)
                 {
                     if(matrix[row,column] == index)
                     {
-                        double x = (column * _Settings.Maze.SizeOfCell) + _Settings.StartXPos;
-                        double y = (row * _Settings.Maze.SizeOfCell) + _Settings.StartYPos;
+                        double x = (column * _Maze.SizeOfCell) + _Settings.StartXPos;
+                        double y = (row * _Maze.SizeOfCell) + _Settings.StartYPos;
                          
                         return (x, y);
                     }
@@ -116,12 +115,12 @@ namespace MazeWpfApp.Helpers
 
         private int[,] GetLatticeMatrix()
         {
-            int[,] matrix = new int[_Settings.Maze.QuantityOfRows,_Settings.Maze.QuantityOfColumns];
+            int[,] matrix = new int[_Maze.QuantityOfRows,_Maze.QuantityOfColumns];
             int index = 0;
             
-            for(int row = 0; row < _Settings.Maze.QuantityOfRows; row++)
+            for(int row = 0; row < _Maze.QuantityOfRows; row++)
             {
-                for(int column = 0; column < _Settings.Maze.QuantityOfColumns; column++)
+                for(int column = 0; column < _Maze.QuantityOfColumns; column++)
                 {
                     matrix[row,column] = index;
                     index++;
