@@ -140,8 +140,6 @@ namespace MazeWpfApp.ViewModels
             BackButton.Visibility = Visibility.Visible;
         }
 
-
-
         private MazeSettings GetMazeSettings(Maze maze)
         {
             var settings = new MazeSettings();

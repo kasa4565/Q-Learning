@@ -5,11 +5,15 @@ namespace MazeWpfApp.ViewModels
 {
     public class MainWindowViewModel
     {
+        private const double _Height = 400;
+        private const double _Width = 600;
+        private const string _Title = "Maze Game";
+
         public MainWindowViewModel()
         {
-            Height = 400;
-            Width = 600;
-            Title = "Maze Game";
+            Height = _Height;
+            Width = _Width;
+            Title = _Title;
             View = new MenuView(new MenuViewModel(Width, Height));
         }
 

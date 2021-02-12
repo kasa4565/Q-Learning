@@ -42,7 +42,6 @@ namespace MazeWpfApp.ViewModels
             var moves = intelligence.GetMoves();
             moves = moves.Skip(1);
             moves = moves.Take(moves.Count() - 1);
-
             
             foreach(var move in moves)
             {
@@ -69,24 +68,19 @@ namespace MazeWpfApp.ViewModels
 
             //top border
             var wall = new WallView(new WallViewModel(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos));
-
             borderWalls.Children.Add(wall);
 
             //bot border
             wall = new WallView(new WallViewModel(_Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1));
-
             borderWalls.Children.Add(wall);
 
             //left border
             wall = new WallView(new WallViewModel(_Settings.StartXPos, _Settings.StartYPos, _Settings.StartXPos, _Settings.StartYPos + _Settings.MazeHeight - 1));
-
             borderWalls.Children.Add(wall);
 
             //right border
             wall = new WallView(new WallViewModel(_Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos, _Settings.StartXPos + _Settings.MazeWidth - 1, _Settings.StartYPos + _Settings.MazeHeight - 1));
-
             borderWalls.Children.Add(wall);
-
 
             return borderWalls;
         }
@@ -95,17 +89,11 @@ namespace MazeWpfApp.ViewModels
         {
             var lattice = new Grid();
 
-            foreach(var cellViewModel in _CellsViewModelsList)
-            {
-                if(cellViewModel.Id == _Settings.Maze.Start)
-                {
-                    cellViewModel.State = ESquareState.IsStart;
-                }
-                else if(cellViewModel.Id == _Settings.Maze.Goal)
-                {
-                    cellViewModel.State = ESquareState.IsGoal;
-                }
+            _CellsViewModelsList.Where(v => v.Id == _Settings.Maze.Start).FirstOrDefault().State = ESquareState.IsStart;
+            _CellsViewModelsList.Where(v => v.Id == _Settings.Maze.Goal).FirstOrDefault().State = ESquareState.IsGoal;
 
+            foreach (var cellViewModel in _CellsViewModelsList)
+            {
                 lattice.Children.Add(new CellView(cellViewModel));
             }
 
