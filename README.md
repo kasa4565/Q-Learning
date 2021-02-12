@@ -9,7 +9,7 @@ Sebastian Bobrowski (s17603@pjwstk.edu.pl), Katarzyna Czerwińska (s17098@pjwstk
 ### CLI
 Execute the "dotnet run --project Q-Learning/Q-Learning.csproj" command in the solution directory.
 ### IDE
-Run the Q-Learning project.
+Run the Q-Learning project for simple console application or MazeWpfApp for extended WPF application.
 ## References
 ### Introduction to Q-Learning Using C#
 https://docs.microsoft.com/en-us/archive/msdn-magazine/2018/august/test-run-introduction-to-q-learning-using-csharp
