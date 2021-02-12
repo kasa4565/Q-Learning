@@ -2,6 +2,7 @@
 using System.Windows;
 using MazeWpfApp.Views;
 using Q_Learning;
+using MazeWpfApp.Helpers;
 
 namespace MazeWpfApp.ViewModels
 {
@@ -109,7 +110,8 @@ namespace MazeWpfApp.ViewModels
         private void Maze1ButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
-            var gameBoardViewModel = new GameBoardViewModel(Width, Height, MazeExamples.Example_1());
+            var mazeViewModel = new MazeViewModel(GetMazeSettings(MazeExamples.Example_1()));
+            var gameBoardViewModel = new GameBoardViewModel(mazeViewModel, Width);
             GameBoard = new GameBoardView(gameBoardViewModel);
             GameBoard.Visibility = Visibility.Visible;
             Content.Children.Add(GameBoard);
@@ -119,7 +121,8 @@ namespace MazeWpfApp.ViewModels
         private void Maze2ButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
-            var gameBoardViewModel = new GameBoardViewModel(Width, Height, MazeExamples.Example_2());
+            var mazeViewModel = new MazeViewModel(GetMazeSettings(MazeExamples.Example_2()));
+            var gameBoardViewModel = new GameBoardViewModel(mazeViewModel, Width);
             GameBoard = new GameBoardView(gameBoardViewModel);
             GameBoard.Visibility = Visibility.Visible;
             Content.Children.Add(GameBoard);
@@ -129,11 +132,27 @@ namespace MazeWpfApp.ViewModels
         private void Maze3ButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
-            var gameBoardViewModel = new GameBoardViewModel(Width, Height, MazeExamples.Example_3());
+            var mazeViewModel = new MazeViewModel(GetMazeSettings(MazeExamples.Example_3()));
+            var gameBoardViewModel = new GameBoardViewModel(mazeViewModel, Width);
             GameBoard = new GameBoardView(gameBoardViewModel);
             GameBoard.Visibility = Visibility.Visible;
             Content.Children.Add(GameBoard);
             BackButton.Visibility = Visibility.Visible;
+        }
+
+
+
+        private MazeSettings GetMazeSettings(Maze maze)
+        {
+            var settings = new MazeSettings();
+
+            settings.XPos = Width / 2;
+            settings.YPos = Height / 2;
+            settings.WindowHeight = Height;
+            settings.WindowWidth = Width;
+            settings.Maze = maze;
+
+            return settings;
         }
     }
 }

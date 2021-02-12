@@ -7,12 +7,12 @@
             var maze = new Maze();
 
             maze.Id = 1;
-            maze.QuantityOfSquares = 12;
-            maze.Start = 8;
-            maze.Goal = 11;
-            maze.QuantityOfColumns = 4;
-            maze.QuantityOfRows = 3;
-            maze.SizeOfCell = 50;
+            maze.QuantityOfSquares = 30;
+            maze.Start = 24;
+            maze.Goal = 29;
+            maze.QuantityOfColumns = 6;
+            maze.QuantityOfRows = 5;
+            maze.SizeOfCell = 40;
             maze.Matrix = CreateMatrix();
             maze.Reward = CreateReward();
             maze.Quality = CreateQuality(maze.QuantityOfSquares);
@@ -21,12 +21,19 @@
             {
                 int[][] FT = new int[maze.QuantityOfSquares][];
                 for (int i = 0; i < maze.QuantityOfSquares; ++i) FT[i] = new int[maze.QuantityOfSquares];
-                FT[0][1] = FT[0][4] = FT[1][0] = FT[1][5] = FT[2][3] = 1;
-                FT[2][6] = FT[3][2] = FT[3][7] = FT[4][0] = FT[4][8] = 1;
-                FT[5][1] = FT[5][6] = FT[5][9] = FT[6][2] = FT[6][5] = 1;
-                FT[6][7] = FT[7][3] = FT[7][6] = FT[7][11] = FT[8][4] = 1;
-                FT[8][9] = FT[9][5] = FT[9][8] = FT[9][10] = FT[10][9] = 1;
-                FT[11][11] = 1;  // Goal
+                FT[0][1] = FT[0][6] = FT[1][0] = FT[1][2] = FT[2][1] = 1;
+                FT[2][8] = FT[2][3] = FT[3][2] = FT[3][9] = 1;
+                FT[4][5] = FT[4][10] = FT[5][4] = FT[5][11] = 1;
+                FT[6][0] = FT[6][12] = FT[7][8] = FT[8][7] = FT[8][2] = FT[8][14] = 1;
+                FT[9][3] = FT[9][10] = FT[9][15] = FT[10][4] = 1;
+                FT[10][9] = FT[11][5] = FT[11][17] = FT[12][6] = 1;
+                FT[12][13] = FT[12][18] = FT[13][12] = FT[13][19] = FT[14][8] = 1;
+                FT[15][9] = FT[15][21] = FT[16][17] = FT[17][16] = FT[17][11] = 1;
+                FT[17][23] = FT[18][12] = FT[18][24] = FT[19][13] = FT[20][26] = FT[20][21] = 1;
+                FT[21][20] = FT[21][15] = FT[22][28] = FT[23][17] = FT[24][18] = 1;
+                FT[25][26] = FT[26][25] = FT[26][27] = FT[26][20] = FT[27][26] = FT[27][28] = 1;
+                FT[28][22] = FT[28][27] = FT[28][29] = 1;
+                FT[29][29] = 1;  // Goal
                 return FT;
             };
 
@@ -34,12 +41,19 @@
             {
                 double[][] R = new double[maze.QuantityOfSquares][];
                 for (int i = 0; i < maze.QuantityOfSquares; ++i) R[i] = new double[maze.QuantityOfSquares];
-                R[0][1] = R[0][4] = R[1][0] = R[1][5] = R[2][3] = -0.1;
-                R[2][6] = R[3][2] = R[3][7] = R[4][0] = R[4][8] = -0.1;
-                R[5][1] = R[5][6] = R[5][9] = R[6][2] = R[6][5] = -0.1;
-                R[6][7] = R[7][3] = R[7][6] = R[7][11] = R[8][4] = -0.1;
-                R[8][9] = R[9][5] = R[9][8] = R[9][10] = R[10][9] = -0.1;
-                R[7][11] = 10.0;  // Goal
+                R[0][1] = R[0][6] = R[1][0] = R[1][2] = R[2][1] = -0.01;
+                R[2][8] = R[2][3] = R[3][2] = R[3][9] = -0.01;
+                R[4][5] = R[4][10] = R[5][4] = R[5][11] = -0.01;
+                R[6][0] = R[6][12] = R[7][8] = R[8][7] = R[8][2] = R[8][14] = -0.01;
+                R[9][3] = R[9][10] = R[9][15] = R[10][4] = -0.01;
+                R[10][9] = R[11][5] = R[11][17] = R[12][6] = -0.01;
+                R[12][13] = R[12][18] = R[13][12] = R[13][19] = R[14][8] = -0.01;
+                R[15][9] = R[15][21] = R[16][17] = R[17][16] = R[17][11] = -0.01;
+                R[17][23] = R[18][12] = R[18][24] = R[19][13] = R[20][26] = R[20][21] = -0.01;
+                R[21][20] = R[21][15] = R[22][28] = R[23][17] = R[24][18] = -0.01;
+                R[25][26] = R[26][25] = R[26][27] = R[26][20] = R[27][26] = R[27][28] = -0.01;
+                R[28][22] = R[28][27] = R[28][29] = -0.01;
+                R[28][29] = 10000.0;  // Goal
                 return R;
             }
 
