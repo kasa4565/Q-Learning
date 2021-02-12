@@ -1,11 +1,8 @@
 ﻿using MazeWpfApp.Helpers;
 using MazeWpfApp.Views;
 using Q_Learning;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,13 +12,13 @@ namespace MazeWpfApp.ViewModels
     {
         private readonly MazeSettings _Settings;
         private readonly MazeConstructor _Constructor;
-        private readonly IEnumerable<CellView> _CellsList;
+        private readonly IEnumerable<CellViewModel> _CellsViewModelsList;
 
         public MazeViewModel(MazeSettings settings)
         {
             _Settings = settings;
             _Constructor = new MazeConstructor(settings);
-            _CellsList = GetCellsList();
+            _CellsViewModelsList = GetCellsViewModelsList();
 
             Content = GetMazeVisualization();
         }
@@ -32,7 +29,7 @@ namespace MazeWpfApp.ViewModels
         {
             var maze = new Grid();
 
-            maze.Children.Add(GetLatticeGrid(_CellsList));
+            maze.Children.Add(GetLatticeGrid());
             maze.Children.Add(GetBorderWalls());
             maze.Children.Add(GetMazeWalls());
 
@@ -49,7 +46,7 @@ namespace MazeWpfApp.ViewModels
             
             foreach(var move in moves)
             {
-                _CellsList.Where(cell => cell.ViewModel.Id == move).First().ViewModel.State = ESquareState.Crossed;
+                _CellsViewModelsList.Where(cell => cell.Id == move).First().State = ESquareState.Crossed;
             }
         }
 
@@ -94,30 +91,30 @@ namespace MazeWpfApp.ViewModels
             return borderWalls;
         }
 
-        private Grid GetLatticeGrid(IEnumerable<CellView> cells)
+        private Grid GetLatticeGrid()
         {
             var lattice = new Grid();
 
-            foreach(var cell in cells)
+            foreach(var cellViewModel in _CellsViewModelsList)
             {
-                if(cell.ViewModel.Id == _Settings.Maze.Start)
+                if(cellViewModel.Id == _Settings.Maze.Start)
                 {
-                    cell.ViewModel.State = ESquareState.IsStart;
+                    cellViewModel.State = ESquareState.IsStart;
                 }
-                else if(cell.ViewModel.Id == _Settings.Maze.Goal)
+                else if(cellViewModel.Id == _Settings.Maze.Goal)
                 {
-                    cell.ViewModel.State = ESquareState.IsGoal;
+                    cellViewModel.State = ESquareState.IsGoal;
                 }
 
-                lattice.Children.Add(cell);
+                lattice.Children.Add(new CellView(cellViewModel));
             }
 
             return lattice;
         }
 
-        private IEnumerable<CellView> GetCellsList()
+        private IEnumerable<CellViewModel> GetCellsViewModelsList()
         {
-            var cells = new List<CellView>();
+            var cellsViewModels = new List<CellViewModel>();
             var currentX = _Settings.StartXPos;
             var currentY = _Settings.StartYPos;
             int cellId = 0;
@@ -126,8 +123,8 @@ namespace MazeWpfApp.ViewModels
             {
                 for(int columnNumber = 1; columnNumber <= _Settings.Maze.QuantityOfColumns; columnNumber++)
                 {
-                    var cell = new CellView(cellId, currentX, currentY, _Settings.Maze.SizeOfCell);
-                    cells.Add(cell);
+                    var cellViewModel = new CellViewModel(cellId, currentX, currentY, _Settings.Maze.SizeOfCell);
+                    cellsViewModels.Add(cellViewModel);
                     cellId++;
                     currentX += _Settings.Maze.SizeOfCell;
                 }
@@ -136,7 +133,7 @@ namespace MazeWpfApp.ViewModels
                 currentX = _Settings.StartXPos;
             }
 
-            return cells;
+            return cellsViewModels;
         }
     }
 }

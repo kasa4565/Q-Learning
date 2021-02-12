@@ -1,6 +1,6 @@
-﻿using MazeWpfApp.Helpers;
-using MazeWpfApp.ViewModels;
+﻿using MazeWpfApp.ViewModels;
 using System.Windows.Controls;
+
 namespace MazeWpfApp.Views
 {
     /// <summary>
@@ -8,13 +8,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class MazeView : UserControl
     {
-        public MazeView(MazeSettings settings)
+        public MazeView(MazeViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new MazeViewModel(settings);
-            DataContext = ViewModel; 
+            DataContext = viewModel; 
         }
-
-        public MazeViewModel ViewModel { get; private set; }
     }
 }

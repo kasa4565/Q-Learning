@@ -13,7 +13,7 @@ namespace MazeWpfApp.ViewModels
 {
     public class GameBoardViewModel
     {
-        private MazeView _MazeView;
+        private MazeViewModel _MazeViewModel;
         private Maze _Maze;
 
         public GameBoardViewModel(double width, double height, Maze maze)
@@ -35,7 +35,7 @@ namespace MazeWpfApp.ViewModels
             set
             {
                 _Maze = value;
-                _MazeView = new MazeView(GetMazeSettings());
+                _MazeViewModel = new MazeViewModel(GetMazeSettings());
                 Content = GetContent();
             }
         }
@@ -44,7 +44,7 @@ namespace MazeWpfApp.ViewModels
         {
             var grid = new Grid();
 
-            grid.Children.Add(_MazeView);
+            grid.Children.Add(new MazeView(_MazeViewModel));
             grid.Children.Add(GetButton());
 
             return grid;
@@ -69,7 +69,7 @@ namespace MazeWpfApp.ViewModels
 
         private void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            _MazeView.ViewModel.VisualizeWalk(Maze);
+            _MazeViewModel.VisualizeWalk(Maze);
         }
 
         private MazeSettings GetMazeSettings()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows;
 using MazeWpfApp.Views;
 using Q_Learning;
@@ -114,7 +109,8 @@ namespace MazeWpfApp.ViewModels
         private void Maze1ButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
-            GameBoard = new GameBoardView(Width, Height, MazeExamples.Example_1());
+            var gameBoardViewModel = new GameBoardViewModel(Width, Height, MazeExamples.Example_1());
+            GameBoard = new GameBoardView(gameBoardViewModel);
             GameBoard.Visibility = Visibility.Visible;
             Content.Children.Add(GameBoard);
             BackButton.Visibility = Visibility.Visible;
@@ -123,7 +119,8 @@ namespace MazeWpfApp.ViewModels
         private void Maze2ButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
-            GameBoard = new GameBoardView(Width, Height, MazeExamples.Example_2());
+            var gameBoardViewModel = new GameBoardViewModel(Width, Height, MazeExamples.Example_2());
+            GameBoard = new GameBoardView(gameBoardViewModel);
             GameBoard.Visibility = Visibility.Visible;
             Content.Children.Add(GameBoard);
             BackButton.Visibility = Visibility.Visible;
@@ -132,7 +129,8 @@ namespace MazeWpfApp.ViewModels
         private void Maze3ButtonClicked(object sender, RoutedEventArgs e)
         {
             Menu.Visibility = Visibility.Collapsed;
-            GameBoard = new GameBoardView(Width, Height, MazeExamples.Example_3());
+            var gameBoardViewModel = new GameBoardViewModel(Width, Height, MazeExamples.Example_3());
+            GameBoard = new GameBoardView(gameBoardViewModel);
             GameBoard.Visibility = Visibility.Visible;
             Content.Children.Add(GameBoard);
             BackButton.Visibility = Visibility.Visible;

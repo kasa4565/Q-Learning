@@ -1,5 +1,6 @@
 ﻿using MazeWpfApp.ViewModels;
 using System.Windows.Controls;
+
 namespace MazeWpfApp.Views
 {
     /// <summary>
@@ -7,13 +8,10 @@ namespace MazeWpfApp.Views
     /// </summary>
     public partial class CellView : UserControl
     {
-        public CellView(int id, double topLeftX, double topLeftY, int sizeOfCell)
+        public CellView(CellViewModel viewModel)
         {
             InitializeComponent();
-            ViewModel = new CellViewModel(id, topLeftX, topLeftY, sizeOfCell);
-            DataContext = ViewModel;
+            DataContext = viewModel;
         }
-
-        public CellViewModel ViewModel { get; private set; }
     }
 }
