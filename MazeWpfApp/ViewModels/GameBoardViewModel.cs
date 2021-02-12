@@ -59,7 +59,7 @@ namespace MazeWpfApp.ViewModels
             button.MinHeight = 50;
             button.MaxWidth = 150;
             button.MinWidth = 150;
-            button.Margin = new Thickness((Width / 2) - 75, 40, 0, 0);
+            button.Margin = new Thickness((Width / 2) - 75, 10, 0, 0);
             button.HorizontalAlignment = HorizontalAlignment.Left;
             button.VerticalAlignment = VerticalAlignment.Top;
             button.Click += StartButtonClicked;

@@ -48,7 +48,7 @@ namespace MazeWpfApp.ViewModels
 
         private Canvas GetSquare()
         {
-            double canvasPadding = 5;
+            double canvasPadding = 3;
 
             Canvas canvas = new Canvas();
             canvas.Margin = new Thickness(TopLeftX + canvasPadding, TopLeftY + canvasPadding, 0, 0);
